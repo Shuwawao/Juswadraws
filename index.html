@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>JUSWADRAWS — Digital Art Portfolio, Commissions & Sketch Community</title>
+    <meta name="description" content="Official digital art universe of JUSWADRAWS: gritty anime-inspired character illustration, client commissions, original OC designs, interactive sketchpad wall, and creative playground." />
+    <meta name="theme-color" content="#0d0d11" />
+    
+    <!-- Open Graph / Meta -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="JUSWADRAWS — Digital Art Portfolio & Commission Platform" />
+    <meta property="og:description" content="Exploring characters, expressions, and stories through digital art. Commissions, original works, sketches, and interactive community doodle wall." />
+    <meta property="og:image" content="/artworks/my%20photo/Untitled%20Design.png" />
+
+    <!-- Google Fonts for Editorial & Anime Direction -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;600;700&family=Permanent+Marker&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Anti-Flash Theme Init Script -->
+    <script>
+      (function() {
+        try {
+          var stored = localStorage.getItem('juswa_theme');
+          var theme = stored ? stored : 'dark';
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
