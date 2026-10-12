@@ -15,7 +15,11 @@ import {
   Eye,
   MessageSquare,
   Clock,
-  User
+  User,
+  X,
+  ChevronLeft,
+  ChevronRight,
+  Maximize2
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { supabase, isSupabaseConfigured } from '../utils/supabaseClient';
@@ -64,6 +68,38 @@ export default function SketchWall() {
   const [approvedDoodles, setApprovedDoodles] = useState([]);
   const [isLoadingDoodles, setIsLoadingDoodles] = useState(true);
   const [wallError, setWallError] = useState(null);
+  const [selectedDoodle, setSelectedDoodle] = useState(null);
+
+  const currentDoodleIdx = selectedDoodle
+    ? approvedDoodles.findIndex((d) => d.id === selectedDoodle.id)
+    : -1;
+
+  const handlePrevDoodle = useCallback(() => {
+    if (currentDoodleIdx > 0) {
+      setSelectedDoodle(approvedDoodles[currentDoodleIdx - 1]);
+    }
+  }, [currentDoodleIdx, approvedDoodles]);
+
+  const handleNextDoodle = useCallback(() => {
+    if (currentDoodleIdx < approvedDoodles.length - 1) {
+      setSelectedDoodle(approvedDoodles[currentDoodleIdx + 1]);
+    }
+  }, [currentDoodleIdx, approvedDoodles]);
+
+  useEffect(() => {
+    if (!selectedDoodle) return;
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') setSelectedDoodle(null);
+      if (e.key === 'ArrowLeft' && currentDoodleIdx > 0) handlePrevDoodle();
+      if (e.key === 'ArrowRight' && currentDoodleIdx < approvedDoodles.length - 1) handleNextDoodle();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = '';
+    };
+  }, [selectedDoodle, currentDoodleIdx, approvedDoodles, handlePrevDoodle, handleNextDoodle]);
 
   // Initialize Canvas with proper dimensions and DPR
   const initCanvas = useCallback(() => {
@@ -666,14 +702,29 @@ export default function SketchWall() {
                 <div
                   key={item.id}
                   className="manga-panel"
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => setSelectedDoodle(item)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') setSelectedDoodle(item);
+                  }}
                   style={{
                     backgroundColor: 'var(--bg-card)',
                     display: 'flex',
                     flexDirection: 'column',
-                    overflow: 'hidden'
+                    overflow: 'hidden',
+                    cursor: 'pointer',
+                    transition: 'transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease'
                   }}
                 >
-                  <div style={{ backgroundColor: '#ffffff', padding: '0.5rem' }}>
+                  <div
+                    style={{
+                      backgroundColor: '#ffffff',
+                      padding: '0.6rem',
+                      position: 'relative',
+                      overflow: 'hidden'
+                    }}
+                  >
                     <img
                       src={item.image_url}
                       alt={`Doodle by ${item.nickname}`}
@@ -681,14 +732,37 @@ export default function SketchWall() {
                       style={{
                         width: '100%',
                         aspectRatio: '16 / 10',
-                        objectFit: 'contain'
+                        objectFit: 'contain',
+                        transition: 'transform 0.3s ease'
                       }}
                     />
+
+                    {/* Hover expand indicator badge */}
+                    <div
+                      style={{
+                        position: 'absolute',
+                        bottom: '0.6rem',
+                        right: '0.6rem',
+                        backgroundColor: 'rgba(10, 10, 14, 0.85)',
+                        color: '#ffffff',
+                        padding: '0.3rem 0.6rem',
+                        fontSize: '0.7rem',
+                        fontFamily: 'var(--font-mono)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.35rem',
+                        borderRadius: '2px',
+                        boxShadow: '0 2px 6px rgba(0,0,0,0.4)'
+                      }}
+                    >
+                      <Eye size={12} color="var(--accent-yellow)" />
+                      <span>VIEW WHOLE DRAWING</span>
+                    </div>
                   </div>
 
                   <div style={{ padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                      <span className="font-heading" style={{ fontSize: '1.2rem', color: 'var(--text-primary)' }}>
+                      <span className="font-heading" style={{ fontSize: '1.25rem', color: 'var(--text-primary)' }}>
                         {item.nickname || 'Anonymous'}
                       </span>
                       <span className="tape-tag" style={{ fontSize: '0.6rem' }}>
@@ -702,8 +776,9 @@ export default function SketchWall() {
                       </p>
                     )}
 
-                    <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', marginTop: '0.4rem' }}>
-                      {new Date(item.created_at).toLocaleDateString()}
+                    <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', marginTop: '0.4rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <span>{new Date(item.created_at).toLocaleDateString()}</span>
+                      <span style={{ color: 'var(--accent-purple)' }}>Click to open ↗</span>
                     </div>
                   </div>
                 </div>
@@ -711,6 +786,218 @@ export default function SketchWall() {
             </div>
           )}
         </section>
+
+        {/* ========================================================
+            FULL-SCREEN DOODLE VIEWER MODAL
+            ======================================================== */}
+        {selectedDoodle && (
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-label={`Drawing by ${selectedDoodle.nickname}`}
+            style={{
+              position: 'fixed',
+              inset: 0,
+              zIndex: 2000,
+              backgroundColor: 'rgba(5, 5, 8, 0.95)',
+              backdropFilter: 'blur(12px)',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              padding: 'clamp(1rem, 2.5vw, 2rem)',
+              overflow: 'hidden'
+            }}
+            onClick={() => setSelectedDoodle(null)}
+          >
+            {/* Modal Top Bar */}
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                width: '100%',
+                zIndex: 10,
+                color: '#ffffff'
+              }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', flexWrap: 'wrap' }}>
+                <span className="tape-tag" style={{ background: 'var(--accent-yellow-tape)', color: '#000' }}>
+                  COMMUNITY DOODLE
+                </span>
+                <span className="font-heading" style={{ fontSize: '1.5rem', letterSpacing: '0.04em' }}>
+                  BY {selectedDoodle.nickname || 'ANONYMOUS ARTIST'}
+                </span>
+              </div>
+
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                <a
+                  href={selectedDoodle.image_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  download={`juswa-community-doodle-${selectedDoodle.id}.png`}
+                  className="btn-manga-secondary"
+                  style={{ padding: '0.45rem 0.85rem', fontSize: '0.85rem', color: '#fff', borderColor: '#555' }}
+                  title="Download drawing PNG"
+                >
+                  <Download size={16} /> <span>SAVE PNG</span>
+                </a>
+
+                <button
+                  onClick={() => setSelectedDoodle(null)}
+                  aria-label="Close doodle viewer"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    width: '40px',
+                    height: '40px',
+                    backgroundColor: '#1f1f2a',
+                    border: '2px solid #ffffff',
+                    color: '#ffffff',
+                    cursor: 'pointer'
+                  }}
+                >
+                  <X size={22} />
+                </button>
+              </div>
+            </div>
+
+            {/* Modal Center Image Stage */}
+            <div
+              style={{
+                flex: 1,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                position: 'relative',
+                padding: '1rem 0',
+                maxHeight: 'calc(100vh - 170px)'
+              }}
+            >
+              {/* Prev Button */}
+              {currentDoodleIdx > 0 && (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handlePrevDoodle();
+                  }}
+                  aria-label="Previous doodle"
+                  style={{
+                    position: 'absolute',
+                    left: '0.5rem',
+                    zIndex: 10,
+                    width: '48px',
+                    height: '48px',
+                    backgroundColor: 'rgba(20, 20, 28, 0.9)',
+                    border: '2px solid #fff',
+                    color: '#fff',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    cursor: 'pointer',
+                    boxShadow: '3px 3px 0px var(--accent-purple)'
+                  }}
+                >
+                  <ChevronLeft size={26} />
+                </button>
+              )}
+
+              {/* The Whole Drawing on White Canvas Paper */}
+              <div
+                onClick={(e) => e.stopPropagation()}
+                style={{
+                  backgroundColor: '#ffffff',
+                  padding: 'clamp(0.75rem, 2vw, 1.5rem)',
+                  border: '3px solid var(--text-primary)',
+                  boxShadow: '0 12px 48px rgba(0, 0, 0, 0.85), 8px 8px 0px var(--accent-purple)',
+                  maxWidth: '92vw',
+                  maxHeight: '100%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+              >
+                <img
+                  src={selectedDoodle.image_url}
+                  alt={`Whole drawing by ${selectedDoodle.nickname}`}
+                  style={{
+                    maxWidth: '100%',
+                    maxHeight: 'calc(100vh - 250px)',
+                    objectFit: 'contain',
+                    display: 'block'
+                  }}
+                />
+              </div>
+
+              {/* Next Button */}
+              {currentDoodleIdx < approvedDoodles.length - 1 && (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleNextDoodle();
+                  }}
+                  aria-label="Next doodle"
+                  style={{
+                    position: 'absolute',
+                    right: '0.5rem',
+                    zIndex: 10,
+                    width: '48px',
+                    height: '48px',
+                    backgroundColor: 'rgba(20, 20, 28, 0.9)',
+                    border: '2px solid #fff',
+                    color: '#fff',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    cursor: 'pointer',
+                    boxShadow: '3px 3px 0px var(--accent-purple)'
+                  }}
+                >
+                  <ChevronRight size={26} />
+                </button>
+              )}
+            </div>
+
+            {/* Modal Bottom Info Bar */}
+            <div
+              style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                gap: '1rem',
+                color: '#bbb',
+                fontSize: '0.85rem',
+                fontFamily: 'var(--font-mono)',
+                paddingTop: '0.8rem',
+                borderTop: '1px solid rgba(255, 255, 255, 0.12)'
+              }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', flexWrap: 'wrap' }}>
+                {selectedDoodle.message && (
+                  <div
+                    style={{
+                      padding: '0.3rem 0.8rem',
+                      backgroundColor: 'rgba(255, 255, 255, 0.08)',
+                      borderLeft: '3px solid var(--accent-yellow)',
+                      color: '#ffffff',
+                      fontStyle: 'italic'
+                    }}
+                  >
+                    &ldquo;{selectedDoodle.message}&rdquo;
+                  </div>
+                )}
+                <span>SUBMITTED: <strong style={{ color: '#fff' }}>{new Date(selectedDoodle.created_at).toLocaleDateString()}</strong></span>
+              </div>
+
+              <div style={{ color: '#888' }}>
+                <span>Press <kbd style={{ padding: '0.15rem 0.4rem', background: '#333', color: '#fff' }}>ESC</kbd> to close &nbsp;•&nbsp; <kbd style={{ padding: '0.15rem 0.4rem', background: '#333', color: '#fff' }}>←</kbd> <kbd style={{ padding: '0.15rem 0.4rem', background: '#333', color: '#fff' }}>→</kbd> to flip</span>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
