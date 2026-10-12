@@ -293,3 +293,128 @@ a {
     padding: 0.55rem 1rem;
   }
 }
+
+/* ========================================================
+   GACHIAKUTA BACKGROUND MARQUEE STREAM ROWS
+   ======================================================== */
+.font-gachiakuta {
+  font-family: var(--font-gachiakuta);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.gachiakuta-marquee-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  opacity: 0.85;
+}
+
+.gachiakuta-marquee-row {
+  display: flex;
+  white-space: nowrap;
+  width: max-content;
+  user-select: none;
+  line-height: 0.85;
+  will-change: transform;
+}
+
+/* Smooth Infinite Right-to-Left Ticker */
+.marquee-scroll-left {
+  animation: marqueeRightToLeft 32s linear infinite;
+}
+
+.marquee-scroll-left-fast {
+  animation: marqueeRightToLeft 24s linear infinite;
+}
+
+.marquee-scroll-left-slow {
+  animation: marqueeRightToLeft 42s linear infinite;
+}
+
+/* Reverse Left-to-Right for alternate rows */
+.marquee-scroll-right {
+  animation: marqueeLeftToRight 36s linear infinite;
+}
+
+@keyframes marqueeRightToLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marqueeLeftToRight {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Hollow Outline Text vs Solid Gritty Text */
+.marquee-text-outline {
+  font-family: var(--font-gachiakuta);
+  font-size: clamp(4.5rem, 11vw, 9.5rem);
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--screentone-dense);
+  text-stroke: 1.5px var(--screentone-dense);
+  margin-right: 2rem;
+  transition: -webkit-text-stroke 0.3s ease;
+}
+
+.marquee-text-solid {
+  font-family: var(--font-gachiakuta);
+  font-size: clamp(4.5rem, 11vw, 9.5rem);
+  color: var(--screentone-color);
+  margin-right: 2rem;
+}
+
+/* Sound FX Toggle Button in Header */
+.sound-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  box-shadow: 2px 2px 0px var(--border-bold);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+  cursor: pointer;
+}
+
+.sound-toggle-btn:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0px var(--accent-purple);
+  border-color: var(--accent-purple);
+}
+
+.sound-toggle-btn.active {
+  border-color: var(--accent-yellow);
+  color: var(--accent-yellow);
+  box-shadow: 2px 2px 0px var(--accent-yellow);
+}
+
+/* Gritty Glitch & Pulse Hover Effects */
+.glitch-hover:hover {
+  animation: subtleGlitch 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@keyframes subtleGlitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 1px); }
+  40% { transform: translate(2px, -1px); }
+  60% { transform: translate(-1px, -1px); }
+  80% { transform: translate(1px, 2px); }
+  100% { transform: translate(0); }
+}

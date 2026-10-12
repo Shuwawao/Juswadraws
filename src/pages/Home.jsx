@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Sparkles, Paintbrush, Flame, Layers, ExternalLink, ChevronDown, Eye } from 'lucide-react';
+import { ArrowRight, Sparkles, Paintbrush, Flame, Layers, ExternalLink, ChevronDown, Eye, Volume2 } from 'lucide-react';
 import { ARTWORKS } from '../data/artworksManifest';
 import SoftwareTools from '../components/SoftwareTools';
 import ImageViewerModal from '../components/ImageViewerModal';
+import soundFx from '../utils/soundFx';
 
 export default function Home() {
   const [selectedArtwork, setSelectedArtwork] = useState(null);
@@ -26,7 +27,16 @@ export default function Home() {
     const idx = featuredWorks.findIndex((a) => a.id === selectedArtwork.id);
     if (idx < featuredWorks.length - 1) setSelectedArtwork(featuredWorks[idx + 1]);
   };
+  // Dynamic scroll listener for interactive parallax shift
+  const [scrollY, setScrollY] = useState(0);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
   return (
     <div style={{ position: 'relative', overflow: 'hidden' }}>
       {/* ========================================================
@@ -42,23 +52,49 @@ export default function Home() {
           borderBottom: '2px solid var(--border-bold)'
         }}
       >
-        {/* Background Editorial Watermark */}
-        <div
-          className="font-heading"
-          style={{
-            position: 'absolute',
-            right: '-3%',
-            top: '5%',
-            fontSize: 'clamp(8rem, 22vw, 24rem)',
-            color: 'var(--screentone-dense)',
-            lineHeight: 0.8,
-            userSelect: 'none',
-            pointerEvents: 'none',
-            zIndex: 0,
-            whiteSpace: 'nowrap'
-          }}
-        >
-          JUSWA
+        {/* ========================================================
+            GACHIAKUTA ANIMATED MARQUEE BACKGROUND STREAM
+            Multiple animated rows moving from right to left with Dela Gothic One
+            ======================================================== */}
+        <div className="gachiakuta-marquee-container" aria-hidden="true">
+          {/* Row 1: Right-to-Left Ticker */}
+          <div
+            className="gachiakuta-marquee-row marquee-scroll-left"
+            style={{ transform: `translateX(${-scrollY * 0.25}px)` }}
+          >
+            {[...Array(6)].map((_, i) => (
+              <React.Fragment key={`r1-${i}`}>
+                <span className="marquee-text-outline">JUSWA DRAWS</span>
+                <span className="marquee-text-solid">JUSWA DRAWS</span>
+              </React.Fragment>
+            ))}
+          </div>
+
+          {/* Row 2: Right-to-Left Ticker (Faster Offset) */}
+          <div
+            className="gachiakuta-marquee-row marquee-scroll-left-fast"
+            style={{ transform: `translateX(${-scrollY * 0.45}px)` }}
+          >
+            {[...Array(6)].map((_, i) => (
+              <React.Fragment key={`r2-${i}`}>
+                <span className="marquee-text-solid">JUSWA DRAWS</span>
+                <span className="marquee-text-outline">JUSWA DRAWS</span>
+              </React.Fragment>
+            ))}
+          </div>
+
+          {/* Row 3: Right-to-Left Ticker (Slower Atmospheric) */}
+          <div
+            className="gachiakuta-marquee-row marquee-scroll-left-slow"
+            style={{ transform: `translateX(${-scrollY * 0.18}px)` }}
+          >
+            {[...Array(6)].map((_, i) => (
+              <React.Fragment key={`r3-${i}`}>
+                <span className="marquee-text-outline">JUSWA DRAWS</span>
+                <span className="marquee-text-solid">JUSWA DRAWS</span>
+              </React.Fragment>
+            ))}
+          </div>
         </div>
 
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
@@ -128,10 +164,20 @@ export default function Home() {
 
               {/* Action Buttons */}
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', marginTop: '0.5rem' }}>
-                <Link to="/artworks" className="btn-manga">
+                <Link
+                  to="/artworks"
+                  className="btn-manga glitch-hover"
+                  onClick={() => soundFx.playClick()}
+                  onMouseEnter={() => soundFx.playHover()}
+                >
                   <Eye size={18} /> EXPLORE ARTWORKS
                 </Link>
-                <Link to="/commissions" className="btn-manga btn-manga-secondary">
+                <Link
+                  to="/commissions"
+                  className="btn-manga btn-manga-secondary glitch-hover"
+                  onClick={() => soundFx.playSlash()}
+                  onMouseEnter={() => soundFx.playHover()}
+                >
                   <Paintbrush size={18} /> COMMISSION ME
                 </Link>
               </div>
@@ -280,13 +326,17 @@ export default function Home() {
             {featuredWorks.map((art, idx) => (
               <div
                 key={art.id}
-                className="manga-panel"
+                className="manga-panel glitch-hover"
                 style={{
                   display: 'flex',
                   flexDirection: 'column',
                   cursor: 'pointer'
                 }}
-                onClick={() => openViewer(art)}
+                onClick={() => {
+                  soundFx.playClick();
+                  openViewer(art);
+                }}
+                onMouseEnter={() => soundFx.playHover()}
               >
                 {/* Artwork Thumbnail Container */}
                 <div

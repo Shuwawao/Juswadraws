@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Sparkles, Paintbrush } from 'lucide-react';
+import soundFx from '../utils/soundFx';
 
 export default function FloatingCommissionButton() {
   const location = useLocation();
@@ -13,7 +14,9 @@ export default function FloatingCommissionButton() {
   return (
     <Link
       to="/commissions"
-      className="floating-commission-btn"
+      className="floating-commission-btn glitch-hover"
+      onClick={() => soundFx.playSlash()}
+      onMouseEnter={() => soundFx.playHover()}
       aria-label="Commission Joshua (JUSWADRAWS)"
     >
       <Paintbrush size={18} />

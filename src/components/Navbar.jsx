@@ -1,13 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
-import { Sun, Moon, Menu, X, Sparkles, Paintbrush, ArrowUpRight } from 'lucide-react';
+import { Sun, Moon, Menu, X, Sparkles, Paintbrush, ArrowUpRight, Volume2, VolumeX } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
+import soundFx from '../utils/soundFx';
 
 export default function Navbar() {
   const { theme, toggleTheme, isDark } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+
+  const [soundOn, setSoundOn] = useState(() => soundFx.isSoundEnabled());
+
+  const handleToggleSound = () => {
+    const nextState = soundFx.toggleSound();
+    setSoundOn(nextState);
+  };
+
+  const handleNavClick = () => {
+    soundFx.playClick();
+  };
+
+  const handleNavHover = () => {
+    soundFx.playHover();
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -152,9 +168,23 @@ export default function Navbar() {
 
           {/* Actions: Theme Toggle & Mobile Menu Button */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+            {/* Interactive Sound FX Toggle */}
+            <button
+              onClick={handleToggleSound}
+              aria-label={soundOn ? 'Disable sound effects' : 'Enable sound effects'}
+              title={soundOn ? 'Sound FX: ON (Click to mute)' : 'Sound FX: MUTED (Click to unmute)'}
+              className={`sound-toggle-btn ${soundOn ? 'active' : ''}`}
+            >
+              {soundOn ? <Volume2 size={18} color="var(--accent-yellow)" /> : <VolumeX size={18} color="var(--text-muted)" />}
+            </button>
+
             {/* Theme Toggle */}
             <button
-              onClick={toggleTheme}
+              onClick={() => {
+                toggleTheme();
+                soundFx.playClick();
+              }}
+              onMouseEnter={handleNavHover}
               aria-label={`Switch to ${isDark ? 'light' : 'dark'} mode`}
               style={{
                 display: 'flex',
