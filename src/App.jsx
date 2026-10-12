@@ -25,23 +25,27 @@ function ScrollToTop() {
 }
 
 export default function App() {
+  const { pathname } = useLocation();
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <ScrollToTop />
       <Navbar />
 
       <main style={{ flex: 1 }}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/artworks" element={<Artworks />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/commissions" element={<Commissions />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/sketch-wall" element={<SketchWall />} />
-          <Route path="/admin" element={<Admin />} />
-          {/* Catch-all redirect to Home */}
-          <Route path="*" element={<Home />} />
-        </Routes>
+        <div key={pathname} className="page-enter-anim">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/artworks" element={<Artworks />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/commissions" element={<Commissions />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/sketch-wall" element={<SketchWall />} />
+            <Route path="/admin" element={<Admin />} />
+            {/* Catch-all redirect to Home */}
+            <Route path="*" element={<Home />} />
+          </Routes>
+        </div>
       </main>
 
       <FloatingCommissionButton />

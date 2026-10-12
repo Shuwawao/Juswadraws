@@ -4,6 +4,7 @@ import { Search, Filter, Layers, Eye, RefreshCw, Sparkles, FolderOpen } from 'lu
 import { ARTWORKS, CATEGORIES } from '../data/artworksManifest';
 import { supabase, isSupabaseConfigured } from '../utils/supabaseClient';
 import ImageViewerModal from '../components/ImageViewerModal';
+import soundFx from '../utils/soundFx';
 
 export default function Artworks() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -17,6 +18,7 @@ export default function Artworks() {
 
   // Sync category param with URL
   const handleCategoryChange = (catId) => {
+    soundFx.playTab();
     setActiveCategory(catId);
     if (catId === 'all') {
       searchParams.delete('category');
@@ -159,6 +161,7 @@ export default function Artworks() {
           >
             <button
               onClick={() => handleCategoryChange('all')}
+              onMouseEnter={() => soundFx.playHover()}
               className={activeCategory === 'all' ? 'btn-manga' : 'btn-manga btn-manga-secondary'}
               style={{ padding: '0.55rem 1.1rem', fontSize: '0.95rem' }}
             >
@@ -169,6 +172,7 @@ export default function Artworks() {
               <button
                 key={cat.id}
                 onClick={() => handleCategoryChange(cat.id)}
+                onMouseEnter={() => soundFx.playHover()}
                 className={activeCategory === cat.id ? 'btn-manga' : 'btn-manga btn-manga-secondary'}
                 style={{ padding: '0.55rem 1.1rem', fontSize: '0.95rem' }}
               >
@@ -208,7 +212,10 @@ export default function Artworks() {
             />
             {searchQuery && (
               <button
-                onClick={() => setSearchQuery('')}
+                onClick={() => {
+                  setSearchQuery('');
+                  soundFx.playPop();
+                }}
                 style={{ color: 'var(--text-muted)', fontSize: '0.8rem', fontFamily: 'var(--font-mono)' }}
               >
                 CLEAR
@@ -239,7 +246,9 @@ export default function Artworks() {
               onClick={() => {
                 setSearchQuery('');
                 handleCategoryChange('all');
+                soundFx.playClick();
               }}
+              onMouseEnter={() => soundFx.playHover()}
               className="btn-manga"
             >
               RESET FILTERS
@@ -256,14 +265,19 @@ export default function Artworks() {
             {filteredArtworks.map((art, idx) => (
               <div
                 key={art.id}
-                className="manga-panel"
+                className="manga-panel artwork-card-entry"
                 style={{
                   display: 'flex',
                   flexDirection: 'column',
                   cursor: 'pointer',
-                  backgroundColor: 'var(--bg-card)'
+                  backgroundColor: 'var(--bg-card)',
+                  animationDelay: `${Math.min(idx * 0.04, 0.4)}s`
                 }}
-                onClick={() => setSelectedArtwork(art)}
+                onClick={() => {
+                  soundFx.playChime();
+                  setSelectedArtwork(art);
+                }}
+                onMouseEnter={() => soundFx.playHover()}
               >
                 {/* Image Frame */}
                 <div

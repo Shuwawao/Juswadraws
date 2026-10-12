@@ -1,17 +1,34 @@
 import React, { useEffect, useCallback } from 'react';
 import { X, ChevronLeft, ChevronRight, Download, Maximize2, Tag } from 'lucide-react';
+import soundFx from '../utils/soundFx';
 
 export default function ImageViewerModal({ artwork, onClose, onPrev, onNext, hasPrev, hasNext }) {
+  const handleClose = useCallback(() => {
+    soundFx.playPop();
+    onClose();
+  }, [onClose]);
+
+  const handlePrevClick = useCallback(() => {
+    soundFx.playClick();
+    onPrev();
+  }, [onPrev]);
+
+  const handleNextClick = useCallback(() => {
+    soundFx.playClick();
+    onNext();
+  }, [onNext]);
+
   const handleKeyDown = useCallback(
     (e) => {
-      if (e.key === 'Escape') onClose();
-      if (e.key === 'ArrowLeft' && hasPrev) onPrev();
-      if (e.key === 'ArrowRight' && hasNext) onNext();
+      if (e.key === 'Escape') handleClose();
+      if (e.key === 'ArrowLeft' && hasPrev) handlePrevClick();
+      if (e.key === 'ArrowRight' && hasNext) handleNextClick();
     },
-    [onClose, onPrev, onNext, hasPrev, hasNext]
+    [handleClose, handlePrevClick, handleNextClick, hasPrev, hasNext]
   );
 
   useEffect(() => {
+    soundFx.playWhoosh();
     document.addEventListener('keydown', handleKeyDown);
     document.body.style.overflow = 'hidden';
     return () => {
@@ -27,6 +44,7 @@ export default function ImageViewerModal({ artwork, onClose, onPrev, onNext, has
       role="dialog"
       aria-modal="true"
       aria-label={artwork.title}
+      className="modal-overlay-anim"
       style={{
         position: 'fixed',
         inset: 0,
@@ -39,7 +57,7 @@ export default function ImageViewerModal({ artwork, onClose, onPrev, onNext, has
         padding: 'clamp(1rem, 2.5vw, 2rem)',
         overflow: 'hidden'
       }}
-      onClick={onClose}
+      onClick={handleClose}
     >
       {/* Top Bar */}
       <div
@@ -68,6 +86,7 @@ export default function ImageViewerModal({ artwork, onClose, onPrev, onNext, has
             target="_blank"
             rel="noopener noreferrer"
             download
+            onClick={() => soundFx.playSuccess()}
             className="btn-manga-secondary"
             style={{ padding: '0.4rem 0.8rem', fontSize: '0.85rem', color: '#fff', borderColor: '#444' }}
             title="Open / Download Full Resolution"
@@ -75,7 +94,7 @@ export default function ImageViewerModal({ artwork, onClose, onPrev, onNext, has
             <Download size={16} /> <span style={{ display: 'none' }} className="d-md-inline">FULL RES</span>
           </a>
           <button
-            onClick={onClose}
+            onClick={handleClose}
             aria-label="Close image viewer"
             style={{
               display: 'flex',
@@ -111,7 +130,7 @@ export default function ImageViewerModal({ artwork, onClose, onPrev, onNext, has
           <button
             onClick={(e) => {
               e.stopPropagation();
-              onPrev();
+              handlePrevClick();
             }}
             aria-label="Previous artwork"
             style={{
@@ -135,8 +154,10 @@ export default function ImageViewerModal({ artwork, onClose, onPrev, onNext, has
         )}
 
         <img
+          key={artwork.url}
           src={artwork.url}
           alt={artwork.title}
+          className="modal-image-anim"
           style={{
             maxWidth: '100%',
             maxHeight: '100%',
@@ -152,7 +173,7 @@ export default function ImageViewerModal({ artwork, onClose, onPrev, onNext, has
           <button
             onClick={(e) => {
               e.stopPropagation();
-              onNext();
+              handleNextClick();
             }}
             aria-label="Next artwork"
             style={{

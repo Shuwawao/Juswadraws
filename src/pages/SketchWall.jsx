@@ -23,6 +23,7 @@ import {
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { supabase, isSupabaseConfigured } from '../utils/supabaseClient';
+import soundFx from '../utils/soundFx';
 
 const PALETTE = [
   { name: 'Ink Black', color: '#0a0a0e' },
@@ -76,12 +77,14 @@ export default function SketchWall() {
 
   const handlePrevDoodle = useCallback(() => {
     if (currentDoodleIdx > 0) {
+      soundFx.playClick();
       setSelectedDoodle(approvedDoodles[currentDoodleIdx - 1]);
     }
   }, [currentDoodleIdx, approvedDoodles]);
 
   const handleNextDoodle = useCallback(() => {
     if (currentDoodleIdx < approvedDoodles.length - 1) {
+      soundFx.playClick();
       setSelectedDoodle(approvedDoodles[currentDoodleIdx + 1]);
     }
   }, [currentDoodleIdx, approvedDoodles]);
@@ -174,6 +177,7 @@ export default function SketchWall() {
   // Undo action
   const handleUndo = () => {
     if (historyIndex <= 0) return;
+    soundFx.playClick();
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
     const newIdx = historyIndex - 1;
@@ -184,6 +188,7 @@ export default function SketchWall() {
   // Redo action
   const handleRedo = () => {
     if (historyIndex >= history.length - 1) return;
+    soundFx.playClick();
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
     const newIdx = historyIndex + 1;
@@ -194,6 +199,7 @@ export default function SketchWall() {
   // Clear Canvas with user confirmation
   const handleClear = () => {
     if (window.confirm('Clear your entire sketchpad canvas?')) {
+      soundFx.playWhoosh();
       const canvas = canvasRef.current;
       const ctx = canvas.getContext('2d');
       const rect = canvas.getBoundingClientRect();
@@ -222,6 +228,7 @@ export default function SketchWall() {
 
   // Start Drawing
   const startDrawing = (e) => {
+    soundFx.playBrush();
     const coords = getCoordinates(e);
     isDrawing.current = true;
     lastPoint.current = coords;
@@ -237,6 +244,7 @@ export default function SketchWall() {
   // Draw Stroke
   const draw = (e) => {
     if (!isDrawing.current) return;
+    soundFx.playBrush();
     const coords = getCoordinates(e);
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
@@ -268,6 +276,7 @@ export default function SketchWall() {
     if (!canvas) return;
 
     try {
+      soundFx.playSuccess();
       const link = document.createElement('a');
       link.download = `juswadraws-doodle-${Date.now()}.png`;
       link.href = canvas.toDataURL('image/png');
@@ -422,9 +431,11 @@ export default function SketchWall() {
                 <button
                   key={p.name}
                   onClick={() => {
+                    soundFx.playPop();
                     setBrushColor(p.color);
                     setIsEraser(false);
                   }}
+                  onMouseEnter={() => soundFx.playHover()}
                   title={p.name}
                   aria-label={p.name}
                   style={{
@@ -449,7 +460,11 @@ export default function SketchWall() {
               {BRUSH_SIZES.map((b) => (
                 <button
                   key={b.size}
-                  onClick={() => setBrushSize(b.size)}
+                  onClick={() => {
+                    soundFx.playPop();
+                    setBrushSize(b.size);
+                  }}
+                  onMouseEnter={() => soundFx.playHover()}
                   className={brushSize === b.size ? 'btn-manga' : 'btn-manga btn-manga-secondary'}
                   style={{ padding: '0.3rem 0.65rem', fontSize: '0.75rem' }}
                 >
@@ -461,7 +476,11 @@ export default function SketchWall() {
             {/* Action Tools: Eraser, Undo, Redo, Clear */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
               <button
-                onClick={() => setIsEraser(!isEraser)}
+                onClick={() => {
+                  soundFx.playPop();
+                  setIsEraser(!isEraser);
+                }}
+                onMouseEnter={() => soundFx.playHover()}
                 className={isEraser ? 'btn-manga' : 'btn-manga btn-manga-secondary'}
                 style={{ padding: '0.4rem 0.8rem', fontSize: '0.85rem' }}
                 title="Toggle Eraser Mode"
@@ -698,15 +717,22 @@ export default function SketchWall() {
                 gap: '1.8rem'
               }}
             >
-              {approvedDoodles.map((item) => (
+              {approvedDoodles.map((item, dIdx) => (
                 <div
                   key={item.id}
-                  className="manga-panel"
+                  className="manga-panel doodle-card-entry"
                   role="button"
                   tabIndex={0}
-                  onClick={() => setSelectedDoodle(item)}
+                  onClick={() => {
+                    soundFx.playChime();
+                    setSelectedDoodle(item);
+                  }}
+                  onMouseEnter={() => soundFx.playHover()}
                   onKeyDown={(e) => {
-                    if (e.key === 'Enter') setSelectedDoodle(item);
+                    if (e.key === 'Enter') {
+                      soundFx.playChime();
+                      setSelectedDoodle(item);
+                    }
                   }}
                   style={{
                     backgroundColor: 'var(--bg-card)',
@@ -714,6 +740,7 @@ export default function SketchWall() {
                     flexDirection: 'column',
                     overflow: 'hidden',
                     cursor: 'pointer',
+                    animationDelay: `${Math.min(dIdx * 0.05, 0.4)}s`,
                     transition: 'transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease'
                   }}
                 >
@@ -795,6 +822,7 @@ export default function SketchWall() {
             role="dialog"
             aria-modal="true"
             aria-label={`Drawing by ${selectedDoodle.nickname}`}
+            className="modal-overlay-anim"
             style={{
               position: 'fixed',
               inset: 0,
@@ -807,7 +835,10 @@ export default function SketchWall() {
               padding: 'clamp(1rem, 2.5vw, 2rem)',
               overflow: 'hidden'
             }}
-            onClick={() => setSelectedDoodle(null)}
+            onClick={() => {
+              soundFx.playPop();
+              setSelectedDoodle(null);
+            }}
           >
             {/* Modal Top Bar */}
             <div
@@ -836,6 +867,7 @@ export default function SketchWall() {
                   target="_blank"
                   rel="noopener noreferrer"
                   download={`juswa-community-doodle-${selectedDoodle.id}.png`}
+                  onClick={() => soundFx.playSuccess()}
                   className="btn-manga-secondary"
                   style={{ padding: '0.45rem 0.85rem', fontSize: '0.85rem', color: '#fff', borderColor: '#555' }}
                   title="Download drawing PNG"
@@ -844,7 +876,10 @@ export default function SketchWall() {
                 </a>
 
                 <button
-                  onClick={() => setSelectedDoodle(null)}
+                  onClick={() => {
+                    soundFx.playPop();
+                    setSelectedDoodle(null);
+                  }}
                   aria-label="Close doodle viewer"
                   style={{
                     display: 'flex',

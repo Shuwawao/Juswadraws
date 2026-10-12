@@ -4,6 +4,7 @@ import { Mail, Send, CheckCircle2, AlertTriangle, RefreshCw, Sparkles, ExternalL
 import { sendCommissionInquiry, isEmailJSConfigured } from '../utils/emailService';
 import { supabase, isSupabaseConfigured } from '../utils/supabaseClient';
 import { COMMISSION_RATES } from './Commissions';
+import soundFx from '../utils/soundFx';
 
 export default function Contact() {
   const location = useLocation();
@@ -58,6 +59,9 @@ export default function Contact() {
     }
 
     setValidationErrors(errors);
+    if (Object.keys(errors).length > 0) {
+      soundFx.playPop();
+    }
     return Object.keys(errors).length === 0;
   };
 
@@ -65,6 +69,7 @@ export default function Contact() {
     e.preventDefault();
     if (!validate()) return;
 
+    soundFx.playSlash();
     setStatus('loading');
     setErrorMessage('');
 
@@ -97,6 +102,7 @@ export default function Contact() {
         }
       }
 
+      soundFx.playSuccess();
       setStatus('success');
     } catch (err) {
       console.error('Submission failed:', err);

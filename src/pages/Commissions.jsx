@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Check, ShieldAlert, Clock, CreditCard, Sparkles, AlertCircle, ArrowRight, RotateCcw } from 'lucide-react';
 import { supabase, isSupabaseConfigured } from '../utils/supabaseClient';
+import soundFx from '../utils/soundFx';
 
 export const COMMISSION_RATES = [
   {
@@ -122,12 +123,14 @@ export default function Commissions() {
     : currentRateItem.usdPrice;
 
   const handleReset = () => {
+    soundFx.playWhoosh();
     setSelectedType('half_body');
     setAdditionalCharacters(false);
     setDetailedBackground(false);
   };
 
   const handleProceedToInquiry = () => {
+    soundFx.playSlash();
     // Navigate to contact inquiry form passing state
     navigate('/contact', {
       state: {
@@ -205,14 +208,22 @@ export default function Commissions() {
 
           <div style={{ display: 'flex', gap: '0.5rem' }}>
             <button
-              onClick={() => setCurrency('PHP')}
+              onClick={() => {
+                setCurrency('PHP');
+                soundFx.playPop();
+              }}
+              onMouseEnter={() => soundFx.playHover()}
               className={currency === 'PHP' ? 'btn-manga' : 'btn-manga btn-manga-secondary'}
               style={{ padding: '0.45rem 1.2rem', fontSize: '1rem' }}
             >
               PHP (₱)
             </button>
             <button
-              onClick={() => setCurrency('USD')}
+              onClick={() => {
+                setCurrency('USD');
+                soundFx.playPop();
+              }}
+              onMouseEnter={() => soundFx.playHover()}
               className={currency === 'USD' ? 'btn-manga' : 'btn-manga btn-manga-secondary'}
               style={{ padding: '0.45rem 1.2rem', fontSize: '1rem' }}
             >
@@ -230,14 +241,14 @@ export default function Commissions() {
             marginBottom: '5rem'
           }}
         >
-          {COMMISSION_RATES.map((rate) => {
+          {COMMISSION_RATES.map((rate, rIdx) => {
             const isSelected = selectedType === rate.id;
             const price = currency === 'PHP' ? rate.phpPrice : rate.usdPrice;
 
             return (
               <div
                 key={rate.id}
-                className="manga-panel"
+                className="manga-panel commission-card-entry"
                 style={{
                   padding: '2rem',
                   display: 'flex',
@@ -246,7 +257,8 @@ export default function Commissions() {
                   border: isSelected ? '2px solid var(--accent-purple)' : '1px solid var(--border-color)',
                   boxShadow: isSelected ? '6px 6px 0px var(--accent-purple)' : 'var(--shadow-pop)',
                   position: 'relative',
-                  backgroundColor: 'var(--bg-card)'
+                  backgroundColor: 'var(--bg-card)',
+                  animationDelay: `${rIdx * 0.08}s`
                 }}
               >
                 <div>
@@ -288,10 +300,12 @@ export default function Commissions() {
                 <div style={{ marginTop: '2rem', borderTop: '1px dashed var(--border-color)', paddingTop: '1rem' }}>
                   <button
                     onClick={() => {
+                      soundFx.playClick();
                       setSelectedType(rate.id);
                       const estimatorEl = document.getElementById('price-estimator');
                       if (estimatorEl) estimatorEl.scrollIntoView({ behavior: 'smooth' });
                     }}
+                    onMouseEnter={() => soundFx.playHover()}
                     className={isSelected ? 'btn-manga' : 'btn-manga btn-manga-secondary'}
                     style={{ width: '100%', fontSize: '0.95rem', padding: '0.6rem' }}
                   >
@@ -344,7 +358,10 @@ export default function Commissions() {
                 </label>
                 <select
                   value={selectedType}
-                  onChange={(e) => setSelectedType(e.target.value)}
+                  onChange={(e) => {
+                    setSelectedType(e.target.value);
+                    soundFx.playTab();
+                  }}
                   style={{
                     width: '100%',
                     padding: '0.8rem 1rem',
@@ -384,7 +401,10 @@ export default function Commissions() {
                   <input
                     type="checkbox"
                     checked={additionalCharacters}
-                    onChange={(e) => setAdditionalCharacters(e.target.checked)}
+                    onChange={(e) => {
+                      setAdditionalCharacters(e.target.checked);
+                      soundFx.playPop();
+                    }}
                     style={{ width: '18px', height: '18px', accentColor: 'var(--accent-purple)' }}
                   />
                   <div>
@@ -409,7 +429,10 @@ export default function Commissions() {
                   <input
                     type="checkbox"
                     checked={detailedBackground}
-                    onChange={(e) => setDetailedBackground(e.target.checked)}
+                    onChange={(e) => {
+                      setDetailedBackground(e.target.checked);
+                      soundFx.playPop();
+                    }}
                     style={{ width: '18px', height: '18px', accentColor: 'var(--accent-purple)' }}
                   />
                   <div>
@@ -423,6 +446,7 @@ export default function Commissions() {
 
               <button
                 onClick={handleReset}
+                onMouseEnter={() => soundFx.playHover()}
                 className="btn-manga-secondary"
                 style={{ alignSelf: 'flex-start', padding: '0.4rem 0.8rem', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}
               >
