@@ -1,7 +1,21 @@
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+// Clean and sanitize the URL (strip quotes, trailing slashes, or accidental /rest/v1 suffixes)
+function sanitizeUrl(url) {
+  if (!url) return '';
+  let cleaned = url.trim().replace(/^['"]|['"]$/g, '');
+  // If user pasted the rest/v1 or auth/v1 endpoint, strip back to base domain
+  cleaned = cleaned.replace(/\/rest\/v1\/?$/, '').replace(/\/auth\/v1\/?$/, '');
+  // Strip trailing slashes
+  cleaned = cleaned.replace(/\/+$/, '');
+  return cleaned;
+}
+
+const rawUrl = import.meta.env.VITE_SUPABASE_URL;
+const rawAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+
+const supabaseUrl = sanitizeUrl(rawUrl);
+const supabaseAnonKey = rawAnonKey ? rawAnonKey.trim().replace(/^['"]|['"]$/g, '') : '';
 
 export const isSupabaseConfigured = Boolean(
   supabaseUrl && 
