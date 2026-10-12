@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import {
   Paintbrush,
   Eraser,
@@ -817,7 +818,7 @@ export default function SketchWall() {
         {/* ========================================================
             FULL-SCREEN DOODLE VIEWER MODAL
             ======================================================== */}
-        {selectedDoodle && (
+        {selectedDoodle && typeof document !== 'undefined' && createPortal(
           <div
             role="dialog"
             aria-modal="true"
@@ -826,14 +827,18 @@ export default function SketchWall() {
             style={{
               position: 'fixed',
               inset: 0,
-              zIndex: 2000,
+              zIndex: 999999,
               backgroundColor: 'rgba(5, 5, 8, 0.95)',
               backdropFilter: 'blur(12px)',
+              WebkitBackdropFilter: 'blur(12px)',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
               padding: 'clamp(1rem, 2.5vw, 2rem)',
-              overflow: 'hidden'
+              overflow: 'hidden',
+              width: '100vw',
+              height: '100vh',
+              boxSizing: 'border-box'
             }}
             onClick={() => {
               soundFx.playPop();
@@ -1031,7 +1036,8 @@ export default function SketchWall() {
                 <span>Press <kbd style={{ padding: '0.15rem 0.4rem', background: '#333', color: '#fff' }}>ESC</kbd> to close &nbsp;•&nbsp; <kbd style={{ padding: '0.15rem 0.4rem', background: '#333', color: '#fff' }}>←</kbd> <kbd style={{ padding: '0.15rem 0.4rem', background: '#333', color: '#fff' }}>→</kbd> to flip</span>
               </div>
             </div>
-          </div>
+          </div>,
+          document.body
         )}
       </div>
     </div>

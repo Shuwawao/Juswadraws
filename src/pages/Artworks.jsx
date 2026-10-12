@@ -292,6 +292,7 @@ export default function Artworks() {
                     src={art.url}
                     alt={art.title}
                     loading="lazy"
+                    decoding="async"
                     style={{
                       width: '100%',
                       height: '100%',
@@ -372,6 +373,8 @@ export default function Artworks() {
           onNext={handleNext}
           hasPrev={currentIdx > 0}
           hasNext={currentIdx < filteredArtworks.length - 1}
+          prevArtwork={currentIdx > 0 ? filteredArtworks[currentIdx - 1] : null}
+          nextArtwork={currentIdx < filteredArtworks.length - 1 ? filteredArtworks[currentIdx + 1] : null}
         />
       )}
     </div>

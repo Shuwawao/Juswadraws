@@ -1,6 +1,6 @@
 // AUTO-GENERATED ARTWORKS MANIFEST
 // Source of truth: D:/art-portfolio2/artworks
-// Generated on 2026-10-10T17:19:05.590Z
+// Generated on 2026-10-12T16:45:47.869Z
 
 export const CATEGORIES = [
   {
@@ -32,23 +32,6 @@ export const CATEGORIES = [
 export const ARTWORKS = [
   {
     "id": "art-1",
-    "fileName": ".emelia1.png",
-    "cleanFileName": "emelia1.png",
-    "folder": "commissioned work",
-    "categoryId": "commissioned-work",
-    "categoryName": "Commissioned Work",
-    "badge": "CLIENT WORK",
-    "title": "Emelia1",
-    "url": "/artworks/commissioned%20work/.emelia1.png",
-    "isFeatured": false,
-    "isBrandAsset": false,
-    "tags": [
-      "Commissioned Work",
-      "PNG"
-    ]
-  },
-  {
-    "id": "art-2",
     "fileName": "Adelynn 1.png",
     "cleanFileName": "Adelynn 1.png",
     "folder": "commissioned work",
@@ -65,7 +48,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-3",
+    "id": "art-2",
     "fileName": "blake commission.png",
     "cleanFileName": "blake commission.png",
     "folder": "commissioned work",
@@ -82,7 +65,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-4",
+    "id": "art-3",
     "fileName": "charlize_commission.png",
     "cleanFileName": "charlize_commission.png",
     "folder": "commissioned work",
@@ -99,7 +82,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-5",
+    "id": "art-4",
     "fileName": "commission brianna.png",
     "cleanFileName": "commission brianna.png",
     "folder": "commissioned work",
@@ -116,7 +99,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-6",
+    "id": "art-5",
     "fileName": "commission star.png",
     "cleanFileName": "commission star.png",
     "folder": "commissioned work",
@@ -125,6 +108,23 @@ export const ARTWORKS = [
     "badge": "CLIENT WORK",
     "title": "Commission Star",
     "url": "/artworks/commissioned%20work/commission%20star.png",
+    "isFeatured": false,
+    "isBrandAsset": false,
+    "tags": [
+      "Commissioned Work",
+      "PNG"
+    ]
+  },
+  {
+    "id": "art-6",
+    "fileName": "emelia1.png",
+    "cleanFileName": "emelia1.png",
+    "folder": "commissioned work",
+    "categoryId": "commissioned-work",
+    "categoryName": "Commissioned Work",
+    "badge": "CLIENT WORK",
+    "title": "Emelia1",
+    "url": "/artworks/commissioned%20work/emelia1.png",
     "isFeatured": false,
     "isBrandAsset": false,
     "tags": [
@@ -219,6 +219,40 @@ export const ARTWORKS = [
   },
   {
     "id": "art-12",
+    "fileName": "favicon-dark.png",
+    "cleanFileName": "favicon-dark.png",
+    "folder": "my photo",
+    "categoryId": "my-photo",
+    "categoryName": "My Photo",
+    "badge": "IDENTITY",
+    "title": "Favicon Dark",
+    "url": "/artworks/my%20photo/favicon-dark.png",
+    "isFeatured": false,
+    "isBrandAsset": false,
+    "tags": [
+      "My Photo",
+      "PNG"
+    ]
+  },
+  {
+    "id": "art-13",
+    "fileName": "favicon-light.png",
+    "cleanFileName": "favicon-light.png",
+    "folder": "my photo",
+    "categoryId": "my-photo",
+    "categoryName": "My Photo",
+    "badge": "IDENTITY",
+    "title": "Favicon Light",
+    "url": "/artworks/my%20photo/favicon-light.png",
+    "isFeatured": false,
+    "isBrandAsset": false,
+    "tags": [
+      "My Photo",
+      "PNG"
+    ]
+  },
+  {
+    "id": "art-14",
     "fileName": "favicon.png",
     "cleanFileName": "favicon.png",
     "folder": "my photo",
@@ -235,7 +269,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-13",
+    "id": "art-15",
     "fileName": "juswa pogi.jpg",
     "cleanFileName": "juswa pogi.jpg",
     "folder": "my photo",
@@ -252,7 +286,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-14",
+    "id": "art-16",
     "fileName": "juswa-font.png",
     "cleanFileName": "juswa-font.png",
     "folder": "my photo",
@@ -269,7 +303,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-15",
+    "id": "art-17",
     "fileName": "juswa-zoom-2.png",
     "cleanFileName": "juswa-zoom-2.png",
     "folder": "my photo",
@@ -286,7 +320,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-16",
+    "id": "art-18",
     "fileName": "Untitled Design.png",
     "cleanFileName": "Untitled Design.png",
     "folder": "my photo",
@@ -303,7 +337,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-17",
+    "id": "art-19",
     "fileName": "20th birthday.png",
     "cleanFileName": "20th birthday.png",
     "folder": "personal works",
@@ -320,7 +354,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-18",
+    "id": "art-20",
     "fileName": "23 months.png",
     "cleanFileName": "23 months.png",
     "folder": "personal works",
@@ -337,7 +371,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-19",
+    "id": "art-21",
     "fileName": "aidan burn2.png",
     "cleanFileName": "aidan burn2.png",
     "folder": "personal works",
@@ -354,7 +388,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-20",
+    "id": "art-22",
     "fileName": "aidan cover.png",
     "cleanFileName": "aidan cover.png",
     "folder": "personal works",
@@ -371,7 +405,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-21",
+    "id": "art-23",
     "fileName": "brant.png",
     "cleanFileName": "brant.png",
     "folder": "personal works",
@@ -388,7 +422,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-22",
+    "id": "art-24",
     "fileName": "chainsaw man.png",
     "cleanFileName": "chainsaw man.png",
     "folder": "personal works",
@@ -405,7 +439,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-23",
+    "id": "art-25",
     "fileName": "CHARACTER SHEET2.png",
     "cleanFileName": "CHARACTER SHEET2.png",
     "folder": "personal works",
@@ -422,7 +456,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-24",
+    "id": "art-26",
     "fileName": "character.png",
     "cleanFileName": "character.png",
     "folder": "personal works",
@@ -439,7 +473,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-25",
+    "id": "art-27",
     "fileName": "charlize_OC.png",
     "cleanFileName": "charlize_OC.png",
     "folder": "personal works",
@@ -456,7 +490,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-26",
+    "id": "art-28",
     "fileName": "david.png",
     "cleanFileName": "david.png",
     "folder": "personal works",
@@ -473,7 +507,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-27",
+    "id": "art-29",
     "fileName": "dekuuuuu.png",
     "cleanFileName": "dekuuuuu.png",
     "folder": "personal works",
@@ -490,7 +524,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-28",
+    "id": "art-30",
     "fileName": "Hyakkimaru.png",
     "cleanFileName": "Hyakkimaru.png",
     "folder": "personal works",
@@ -507,7 +541,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-29",
+    "id": "art-31",
     "fileName": "jhin.png",
     "cleanFileName": "jhin.png",
     "folder": "personal works",
@@ -524,7 +558,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-30",
+    "id": "art-32",
     "fileName": "noice.png",
     "cleanFileName": "noice.png",
     "folder": "personal works",
@@ -541,7 +575,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-31",
+    "id": "art-33",
     "fileName": "riyouchi.png",
     "cleanFileName": "riyouchi.png",
     "folder": "personal works",
@@ -558,7 +592,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-32",
+    "id": "art-34",
     "fileName": "rudi.png",
     "cleanFileName": "rudi.png",
     "folder": "personal works",
@@ -575,7 +609,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-33",
+    "id": "art-35",
     "fileName": "snek.png",
     "cleanFileName": "snek.png",
     "folder": "personal works",
@@ -592,7 +626,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-34",
+    "id": "art-36",
     "fileName": "supaidaman.png",
     "cleanFileName": "supaidaman.png",
     "folder": "personal works",
@@ -609,7 +643,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-35",
+    "id": "art-37",
     "fileName": "tats.png",
     "cleanFileName": "tats.png",
     "folder": "personal works",
@@ -626,7 +660,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-36",
+    "id": "art-38",
     "fileName": "top.png",
     "cleanFileName": "top.png",
     "folder": "personal works",
@@ -643,24 +677,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-37",
-    "fileName": ".sketch 9.png",
-    "cleanFileName": "sketch 9.png",
-    "folder": "sketches and studies",
-    "categoryId": "sketches-and-studies",
-    "categoryName": "Sketches and Studies",
-    "badge": "STUDY",
-    "title": "Sketch 9",
-    "url": "/artworks/sketches%20and%20studies/.sketch%209.png",
-    "isFeatured": false,
-    "isBrandAsset": false,
-    "tags": [
-      "Sketches and Studies",
-      "PNG"
-    ]
-  },
-  {
-    "id": "art-38",
+    "id": "art-39",
     "fileName": "afo.png",
     "cleanFileName": "afo.png",
     "folder": "sketches and studies",
@@ -677,7 +694,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-39",
+    "id": "art-40",
     "fileName": "aidan 2022.png",
     "cleanFileName": "aidan 2022.png",
     "folder": "sketches and studies",
@@ -694,7 +711,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-40",
+    "id": "art-41",
     "fileName": "birdie.png",
     "cleanFileName": "birdie.png",
     "folder": "sketches and studies",
@@ -711,7 +728,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-41",
+    "id": "art-42",
     "fileName": "deku and bakugo.png",
     "cleanFileName": "deku and bakugo.png",
     "folder": "sketches and studies",
@@ -728,7 +745,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-42",
+    "id": "art-43",
     "fileName": "fern.webp",
     "cleanFileName": "fern.webp",
     "folder": "sketches and studies",
@@ -745,7 +762,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-43",
+    "id": "art-44",
     "fileName": "foxe.webp",
     "cleanFileName": "foxe.webp",
     "folder": "sketches and studies",
@@ -762,7 +779,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-44",
+    "id": "art-45",
     "fileName": "gachiakuta oc.png",
     "cleanFileName": "gachiakuta oc.png",
     "folder": "sketches and studies",
@@ -779,7 +796,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-45",
+    "id": "art-46",
     "fileName": "garou.png",
     "cleanFileName": "garou.png",
     "folder": "sketches and studies",
@@ -796,7 +813,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-46",
+    "id": "art-47",
     "fileName": "george,muri,ken.png",
     "cleanFileName": "george,muri,ken.png",
     "folder": "sketches and studies",
@@ -813,7 +830,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-47",
+    "id": "art-48",
     "fileName": "ghost rider.png",
     "cleanFileName": "ghost rider.png",
     "folder": "sketches and studies",
@@ -830,7 +847,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-48",
+    "id": "art-49",
     "fileName": "jinx.png",
     "cleanFileName": "jinx.png",
     "folder": "sketches and studies",
@@ -847,7 +864,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-49",
+    "id": "art-50",
     "fileName": "maria.webp",
     "cleanFileName": "maria.webp",
     "folder": "sketches and studies",
@@ -864,7 +881,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-50",
+    "id": "art-51",
     "fileName": "mha sketch.png",
     "cleanFileName": "mha sketch.png",
     "folder": "sketches and studies",
@@ -881,7 +898,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-51",
+    "id": "art-52",
     "fileName": "mha study.png",
     "cleanFileName": "mha study.png",
     "folder": "sketches and studies",
@@ -898,7 +915,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-52",
+    "id": "art-53",
     "fileName": "New board.png",
     "cleanFileName": "New board.png",
     "folder": "sketches and studies",
@@ -915,7 +932,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-53",
+    "id": "art-54",
     "fileName": "New Drawing2.png",
     "cleanFileName": "New Drawing2.png",
     "folder": "sketches and studies",
@@ -932,7 +949,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-54",
+    "id": "art-55",
     "fileName": "power.png",
     "cleanFileName": "power.png",
     "folder": "sketches and studies",
@@ -949,7 +966,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-55",
+    "id": "art-56",
     "fileName": "random sketch.png",
     "cleanFileName": "random sketch.png",
     "folder": "sketches and studies",
@@ -966,7 +983,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-56",
+    "id": "art-57",
     "fileName": "sano.png",
     "cleanFileName": "sano.png",
     "folder": "sketches and studies",
@@ -983,7 +1000,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-57",
+    "id": "art-58",
     "fileName": "shigi.png",
     "cleanFileName": "shigi.png",
     "folder": "sketches and studies",
@@ -1000,7 +1017,24 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-58",
+    "id": "art-59",
+    "fileName": "sketch 9.png",
+    "cleanFileName": "sketch 9.png",
+    "folder": "sketches and studies",
+    "categoryId": "sketches-and-studies",
+    "categoryName": "Sketches and Studies",
+    "badge": "STUDY",
+    "title": "Sketch 9",
+    "url": "/artworks/sketches%20and%20studies/sketch%209.png",
+    "isFeatured": false,
+    "isBrandAsset": false,
+    "tags": [
+      "Sketches and Studies",
+      "PNG"
+    ]
+  },
+  {
+    "id": "art-60",
     "fileName": "squad.webp",
     "cleanFileName": "squad.webp",
     "folder": "sketches and studies",
@@ -1017,7 +1051,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-59",
+    "id": "art-61",
     "fileName": "strom.webp",
     "cleanFileName": "strom.webp",
     "folder": "sketches and studies",
@@ -1034,7 +1068,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-60",
+    "id": "art-62",
     "fileName": "study.png",
     "cleanFileName": "study.png",
     "folder": "sketches and studies",
@@ -1051,7 +1085,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-61",
+    "id": "art-63",
     "fileName": "tatsu x elio.png",
     "cleanFileName": "tatsu x elio.png",
     "folder": "sketches and studies",
@@ -1068,7 +1102,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-62",
+    "id": "art-64",
     "fileName": "tatsumaki.png",
     "cleanFileName": "tatsumaki.png",
     "folder": "sketches and studies",
@@ -1085,7 +1119,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-63",
+    "id": "art-65",
     "fileName": "toga.webp",
     "cleanFileName": "toga.webp",
     "folder": "sketches and studies",
@@ -1102,7 +1136,7 @@ export const ARTWORKS = [
     ]
   },
   {
-    "id": "art-64",
+    "id": "art-66",
     "fileName": "zack.png",
     "cleanFileName": "zack.png",
     "folder": "sketches and studies",

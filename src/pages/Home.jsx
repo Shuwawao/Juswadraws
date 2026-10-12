@@ -548,16 +548,21 @@ export default function Home() {
       </section>
 
       {/* Fullscreen Modal Image Viewer */}
-      {selectedArtwork && (
-        <ImageViewerModal
-          artwork={selectedArtwork}
-          onClose={() => setSelectedArtwork(null)}
-          onPrev={handlePrev}
-          onNext={handleNext}
-          hasPrev={featuredWorks.findIndex((a) => a.id === selectedArtwork.id) > 0}
-          hasNext={featuredWorks.findIndex((a) => a.id === selectedArtwork.id) < featuredWorks.length - 1}
-        />
-      )}
+      {selectedArtwork && (() => {
+        const featIdx = featuredWorks.findIndex((a) => a.id === selectedArtwork.id);
+        return (
+          <ImageViewerModal
+            artwork={selectedArtwork}
+            onClose={() => setSelectedArtwork(null)}
+            onPrev={handlePrev}
+            onNext={handleNext}
+            hasPrev={featIdx > 0}
+            hasNext={featIdx < featuredWorks.length - 1}
+            prevArtwork={featIdx > 0 ? featuredWorks[featIdx - 1] : null}
+            nextArtwork={featIdx < featuredWorks.length - 1 ? featuredWorks[featIdx + 1] : null}
+          />
+        );
+      })()}
     </div>
   );
 }

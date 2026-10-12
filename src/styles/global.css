@@ -415,7 +415,7 @@ a {
 
 /* Fluid Page Route Entrance */
 .page-enter-anim {
-  animation: pageFadeSlide 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: pageFadeSlide 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes pageFadeSlide {
@@ -425,7 +425,7 @@ a {
   }
   100% {
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
   }
 }
 
@@ -433,17 +433,26 @@ a {
 .artwork-card-entry,
 .commission-card-entry,
 .doodle-card-entry {
-  animation: cardFlyIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: cardFlyIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 @keyframes cardFlyIn {
   0% {
     opacity: 0;
-    transform: translateY(24px) scale(0.97);
+    transform: translateY(20px) scale(0.97);
   }
   100% {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: none;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
 
