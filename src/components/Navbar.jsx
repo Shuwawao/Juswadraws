@@ -65,26 +65,20 @@ export default function Navbar() {
             }}
             aria-label="JUSWADRAWS Home"
           >
-            <div
+            <img
+              src={isDark ? '/favicon-dark.png' : '/favicon-light.png'}
+              alt="JUSWADRAWS Icon"
               style={{
                 width: '38px',
                 height: '38px',
-                border: '2px solid var(--text-primary)',
-                boxShadow: '3px 3px 0px var(--accent-purple)',
-                overflow: 'hidden',
-                backgroundColor: 'var(--bg-card)',
-                flexShrink: 0
+                objectFit: 'contain',
+                flexShrink: 0,
+                display: 'block'
               }}
-            >
-              <img
-                src="/artworks/my%20photo/favicon.png"
-                alt="JUSWADRAWS Icon"
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                onError={(e) => {
-                  e.target.style.display = 'none';
-                }}
-              />
-            </div>
+              onError={(e) => {
+                e.target.style.display = 'none';
+              }}
+            />
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                 <span

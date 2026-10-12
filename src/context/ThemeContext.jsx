@@ -19,6 +19,16 @@ export function ThemeProvider({ children }) {
     } catch (e) {
       console.warn('Could not save theme preference to localStorage', e);
     }
+
+    // Dynamically update browser tab favicon depending on theme
+    const faviconUrl = theme === 'light' ? '/favicon-light.png?v=3' : '/favicon-dark.png?v=3';
+    const linkIcon = document.querySelector("link[rel='icon']");
+    const linkShortcut = document.querySelector("link[rel='shortcut icon']");
+    const linkApple = document.querySelector("link[rel='apple-touch-icon']");
+
+    if (linkIcon) linkIcon.href = faviconUrl;
+    if (linkShortcut) linkShortcut.href = faviconUrl;
+    if (linkApple) linkApple.href = faviconUrl;
   }, [theme]);
 
   const toggleTheme = () => {
