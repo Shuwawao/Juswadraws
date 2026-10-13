@@ -77,7 +77,6 @@ art-portfolio2/
 ├── supabase/
 │   └── migrations/
 │       └── 20261011_initial_schema.sql # Production PostgreSQL & RLS schema
-├── .env.example                # Safe environment variable placeholders
 ├── vercel.json                 # SPA route rewrite configuration
 └── vite.config.js              # Vite config with artworks streaming plugin
 ```
@@ -96,9 +95,16 @@ npm install
 ```
 
 ### 3. Configure Local Environment Variables
-Copy `.env.example` to `.env`:
-```bash
-cp .env.example .env
+Create a `.env` file in the project root with the following keys:
+```env
+# Supabase
+VITE_SUPABASE_URL=your_supabase_project_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+
+# EmailJS
+VITE_EMAILJS_SERVICE_ID=your_service_id
+VITE_EMAILJS_TEMPLATE_ID=your_template_id
+VITE_EMAILJS_PUBLIC_KEY=your_public_key
 ```
 Update the keys with your credentials (see setup sections below).
 
