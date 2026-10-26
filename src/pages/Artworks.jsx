@@ -127,7 +127,7 @@ export default function Artworks() {
       <div className="container">
         {/* Header Title Section (Manga Catalog Header, Ref 1) */}
         <div style={{ marginBottom: '3rem' }}>
-          <div className="section-subtitle">VAULT ARCHIVE // COMPLETE CHAPTER CATALOG</div>
+          <div className="section-subtitle">VAULT ARCHIVE • COMPLETE CHAPTER CATALOG</div>
           <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '1rem' }}>
             <h1 className="section-title">MANGA & ARTWORK CATALOG</h1>
             <div className="speech-bubble">

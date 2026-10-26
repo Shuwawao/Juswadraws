@@ -192,7 +192,7 @@ export default function Home() {
                   paddingTop: '0.85rem'
                 }}
               >
-                <div>STATUS: <strong style={{ color: '#22c55e' }}>ONLINE // OPEN</strong></div>
+                <div>STATUS: <strong style={{ color: '#22c55e' }}>ONLINE • OPEN</strong></div>
                 <div>MEDIUM: <strong style={{ color: 'var(--text-primary)' }}>CLIP STUDIO / KRITA</strong></div>
                 <div>STUDIO: <strong style={{ color: 'var(--text-primary)' }}>PHILIPPINES</strong></div>
               </div>
@@ -239,7 +239,7 @@ export default function Home() {
                   }}
                 >
                   <span className="manga-narrator-box manga-narrator-box-red">
-                    COVER // VOL. 01
+                    COVER • VOL. 01
                   </span>
                 </div>
 
@@ -488,7 +488,7 @@ export default function Home() {
                   {/* Corner Narrator Badge */}
                   <div style={{ position: 'absolute', top: '0.75rem', left: '0.75rem' }}>
                     <span className="manga-narrator-box">
-                      ACT 0{idx + 1} // {art.categoryName}
+                      ACT 0{idx + 1} • {art.categoryName}
                     </span>
                   </div>
                 </div>
@@ -592,7 +592,7 @@ export default function Home() {
 
             {/* Content Column */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-              <div className="section-subtitle">ARTIST DOSSIER // MANGA ROOTS</div>
+              <div className="section-subtitle">ARTIST DOSSIER • MANGA ROOTS</div>
               <h2 className="section-title">MEET JUSWADRAWS</h2>
 
               <p style={{ color: 'var(--text-secondary)', fontSize: '1.05rem', lineHeight: '1.7' }}>

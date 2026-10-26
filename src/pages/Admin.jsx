@@ -319,7 +319,7 @@ export default function Admin() {
                 ARTIST DASHBOARD
               </h1>
               <span className="font-mono" style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
-                RESTRICTED // JUSWADRAWS ADMIN
+                RESTRICTED • JUSWADRAWS ADMIN
               </span>
             </div>
 

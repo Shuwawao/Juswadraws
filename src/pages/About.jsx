@@ -9,7 +9,7 @@ export default function About() {
       <div className="container">
         {/* Main Header / Intro */}
         <div style={{ marginBottom: '4rem' }}>
-          <div className="section-subtitle">THE ARTIST BEHIND THE PEN // 02</div>
+          <div className="section-subtitle">THE ARTIST BEHIND THE PEN • 02</div>
           <h1 className="section-title">ABOUT JUSWADRAWS</h1>
           <p style={{ color: 'var(--text-secondary)', marginTop: '0.6rem', fontSize: '1.1rem', maxWidth: '650px' }}>
             Digital artist, character illustrator, and visual storyteller exploring gritty anime aesthetics, expressive lineart, and dynamic character concepts.
@@ -62,7 +62,7 @@ export default function About() {
                 }}
               >
                 <span className="manga-narrator-box manga-narrator-box-red">
-                  CHARACTER DESIGN HUB // OC
+                  CHARACTER DESIGN HUB • OC
                 </span>
               </div>
             </div>
@@ -75,7 +75,7 @@ export default function About() {
               }}
             >
               <div className="speech-bubble">
-                <span>ORIGINAL CHARACTER ART // PH</span>
+                <span>ORIGINAL CHARACTER ART • PH</span>
               </div>
             </div>
           </div>

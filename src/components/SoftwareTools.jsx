@@ -124,7 +124,7 @@ export default function SoftwareTools() {
 
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '1.5rem', borderTop: '1px dashed var(--border-color)', paddingTop: '0.8rem' }}>
                 <span className="font-mono" style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
-                  SLOT 0{idx + 1} // ACTIVE
+                  SLOT 0{idx + 1} • ACTIVE
                 </span>
                 <span style={{ width: '6px', height: '6px', backgroundColor: tool.color, borderRadius: '50%' }} />
               </div>

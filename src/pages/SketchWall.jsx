@@ -352,7 +352,7 @@ export default function SketchWall() {
       <div className="container">
         {/* Header */}
         <div style={{ marginBottom: '3rem' }}>
-          <div className="section-subtitle">COMMUNITY CANVAS // LIVE SKETCHPAD</div>
+          <div className="section-subtitle">COMMUNITY CANVAS • LIVE SKETCHPAD</div>
           <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '1rem', justifyContent: 'space-between' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', flexWrap: 'wrap' }}>
               <h1 className="section-title">LEAVE A NOTE / DOODLE TO THE ARTIST</h1>

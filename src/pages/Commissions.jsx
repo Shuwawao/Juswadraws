@@ -148,7 +148,7 @@ export default function Commissions() {
       <div className="container">
         {/* Header & Status Indicator */}
         <div style={{ marginBottom: '3.5rem' }}>
-          <div className="section-subtitle">COMMISSION STATION // OFFICIAL MANGA RATES</div>
+          <div className="section-subtitle">COMMISSION STATION • OFFICIAL MANGA RATES</div>
           <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '1rem', justifyContent: 'space-between' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
               <h1 className="section-title">COMMISSIONS & PRICING</h1>
@@ -178,7 +178,7 @@ export default function Commissions() {
                 }}
               />
               <span className="font-heading" style={{ fontSize: '1.1rem', color: isAvailable ? '#22c55e' : '#ef4444' }}>
-                {isAvailable ? 'COMMISSIONS: ONLINE // OPEN' : 'COMMISSIONS: CURRENTLY CLOSED'}
+                {isAvailable ? 'COMMISSIONS: ONLINE • OPEN' : 'COMMISSIONS: CURRENTLY CLOSED'}
               </span>
             </div>
           </div>
@@ -331,7 +331,7 @@ export default function Commissions() {
             ======================================================== */}
         <section style={{ marginBottom: '5rem' }}>
           <div style={{ marginBottom: '2.5rem' }}>
-            <div className="section-subtitle">WORKFLOW BLUEPRINT // 5 PRODUCTION STAGES</div>
+            <div className="section-subtitle">WORKFLOW BLUEPRINT • 5 PRODUCTION STAGES</div>
             <h2 className="section-title">THE PRODUCTION PIPELINE</h2>
             <p style={{ color: 'var(--text-secondary)', maxWidth: '640px', marginTop: '0.5rem' }}>
               From initial reference brief to final high-resolution deliverable, every commission follows a disciplined mangaka manuscript workflow.
@@ -408,7 +408,7 @@ export default function Commissions() {
           <span className="drafting-corner-mark-br">+</span>
 
           <div style={{ marginBottom: '2rem' }}>
-            <div className="section-subtitle">CONFIGURATOR // REAL-TIME CALCULATION</div>
+            <div className="section-subtitle">CONFIGURATOR • REAL-TIME CALCULATION</div>
             <h2 className="font-heading" style={{ fontSize: '2.5rem' }}>
               INTERACTIVE COMMISSION ESTIMATOR
             </h2>

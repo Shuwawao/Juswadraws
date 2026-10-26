@@ -114,12 +114,6 @@ a {
   margin-bottom: 0.5rem;
 }
 
-.section-subtitle::before {
-  content: '//';
-  color: var(--accent-purple);
-  font-weight: bold;
-}
-
 /* ========================================================
    GRITTY ANIME & EDITORIAL GRAPHIC UTILITIES
    ======================================================== */

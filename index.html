@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/favicon-dark.png?v=4" media="(prefers-color-scheme: dark)" />
@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>JUSWADRAWS — Digital Art Portfolio, Commissions & Sketch Community</title>
     <meta name="description" content="Official digital art universe of JUSWADRAWS: gritty anime-inspired character illustration, client commissions, original OC designs, interactive sketchpad wall, and creative playground." />
-    <meta name="theme-color" content="#0d0d11" />
+    <meta name="theme-color" content="#f6f4ee" />
     
     <!-- Open Graph / Meta -->
     <meta property="og:type" content="website" />
@@ -28,13 +28,13 @@
       (function() {
         try {
           var stored = localStorage.getItem('juswa_theme');
-          var theme = stored ? stored : 'dark';
+          var theme = stored ? stored : 'light';
           document.documentElement.setAttribute('data-theme', theme);
           var faviconUrl = theme === 'light' ? '/favicon-light.png?v=4' : '/favicon-dark.png?v=4';
           var linkIcon = document.querySelector("link[rel='icon']");
           if (linkIcon) linkIcon.href = faviconUrl;
         } catch (e) {
-          document.documentElement.setAttribute('data-theme', 'dark');
+          document.documentElement.setAttribute('data-theme', 'light');
         }
       })();
     </script>

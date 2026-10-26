@@ -116,7 +116,7 @@ export default function Contact() {
       <div className="container">
         {/* Header */}
         <div style={{ marginBottom: '3.5rem' }}>
-          <div className="section-subtitle">COMMISSION INQUIRY // 05</div>
+          <div className="section-subtitle">COMMISSION INQUIRY • 05</div>
           <h1 className="section-title">REQUEST A COMMISSION</h1>
           <p style={{ color: 'var(--text-secondary)', marginTop: '0.6rem', fontSize: '1.05rem', maxWidth: '680px' }}>
             Submit your character details and project specifications below. Joshua reviews all inquiries and will reply with confirmation and sketch schedules.
