@@ -63,60 +63,43 @@ export default function Navbar() {
             paddingBottom: '0.85rem'
           }}
         >
-          {/* Brand Logo with Custom juswa-font asset */}
+          {/* Brand Banner — JUSWA OPEN FOR COMMISSIONS */}
           <Link
             to="/"
             onClick={() => soundFx.playSlash()}
             onMouseEnter={handleNavHover}
+            className="nav-brand-banner-link"
             style={{
-              display: 'flex',
+              display: 'inline-flex',
               alignItems: 'center',
-              gap: '0.75rem',
               textDecoration: 'none'
             }}
-            aria-label="JUSWADRAWS Home"
+            aria-label="JUSWA — Open for Commissions"
           >
-            <img
-              src={isDark ? '/favicon-dark.png' : '/favicon-light.png'}
-              alt="JUSWADRAWS Icon"
+            <div
+              className="nav-brand-container"
               style={{
-                width: '38px',
-                height: '38px',
-                objectFit: 'contain',
-                flexShrink: 0,
-                display: 'block'
+                display: 'flex',
+                alignItems: 'center',
+                backgroundColor: '#161416',
+                border: '2px solid var(--border-bold)',
+                borderRadius: '4px',
+                boxShadow: '3px 3px 0px var(--border-bold)',
+                overflow: 'hidden',
+                transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)'
               }}
-              onError={(e) => {
-                e.target.style.display = 'none';
-              }}
-            />
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                <span
-                  className="font-heading"
-                  style={{
-                    fontSize: '1.65rem',
-                    letterSpacing: '0.08em',
-                    lineHeight: 1,
-                    color: 'var(--text-primary)'
-                  }}
-                >
-                  JUSWA<span style={{ color: 'var(--accent-purple)' }}>DRAWS</span>
-                </span>
-                <span className="tape-tag" style={{ fontSize: '0.62rem', padding: '0.1rem 0.35rem' }}>
-                  STUDIO
-                </span>
-              </div>
-              <span
-                className="font-mono"
+            >
+              <img
+                src="/images/nav-banner.png"
+                alt="JUSWA — OPEN FOR COMMISSIONS"
+                className="nav-brand-banner-img"
                 style={{
-                  fontSize: '0.65rem',
-                  letterSpacing: '0.12em',
-                  color: 'var(--text-muted)'
+                  height: '42px',
+                  width: 'auto',
+                  display: 'block',
+                  objectFit: 'contain'
                 }}
-              >
-                CHARACTER ARTIST // PH
-              </span>
+              />
             </div>
           </Link>
 
@@ -236,6 +219,19 @@ export default function Navbar() {
           }}
         >
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', paddingBottom: '0.5rem' }}>
+              <img
+                src="/images/nav-banner.png"
+                alt="JUSWA — OPEN FOR COMMISSIONS"
+                style={{
+                  height: '46px',
+                  width: 'auto',
+                  borderRadius: '4px',
+                  border: '2px solid var(--border-bold)',
+                  boxShadow: '4px 4px 0px var(--border-bold)'
+                }}
+              />
+            </div>
             <div className="section-subtitle">NAVIGATION DIRECTORY</div>
             {navLinks.map((link) => (
               <NavLink
@@ -312,8 +308,22 @@ export default function Navbar() {
         </div>
       )}
 
-      {/* Responsive CSS for Desktop Nav */}
+      {/* Responsive CSS for Desktop Nav and Brand Banner */}
       <style>{`
+        .nav-brand-banner-link:hover .nav-brand-container {
+          transform: translate(-2px, -2px);
+          box-shadow: 5px 5px 0px var(--accent-yellow-tape) !important;
+          border-color: var(--accent-yellow-tape) !important;
+        }
+        .nav-brand-banner-link:active .nav-brand-container {
+          transform: translate(1px, 1px);
+          box-shadow: 1px 1px 0px var(--accent-yellow-tape) !important;
+        }
+        @media (max-width: 600px) {
+          .nav-brand-banner-img {
+            height: 34px !important;
+          }
+        }
         @media (min-width: 900px) {
           .desktop-nav {
             display: flex !important;

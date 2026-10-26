@@ -21,7 +21,7 @@ export function ThemeProvider({ children }) {
     }
 
     // Dynamically update browser tab favicon depending on theme
-    const faviconUrl = theme === 'light' ? '/favicon-light.png?v=3' : '/favicon-dark.png?v=3';
+    const faviconUrl = theme === 'light' ? '/favicon-light.png?v=4' : '/favicon-dark.png?v=4';
     const linkIcon = document.querySelector("link[rel='icon']");
     const linkShortcut = document.querySelector("link[rel='shortcut icon']");
     const linkApple = document.querySelector("link[rel='apple-touch-icon']");
