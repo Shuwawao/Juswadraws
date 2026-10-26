@@ -118,24 +118,12 @@ export default function Home() {
                 </span>
               </div>
 
-              {/* Hand-drawn Brand Asset + Manga Title Typography */}
+              {/* Manga Title Typography */}
               <div>
-                <div style={{ marginBottom: '0.5rem', maxWidth: '300px' }}>
-                  <img
-                    src="/artworks/my%20photo/juswa-font.png"
-                    alt="JUSWADRAWS Signature Wordmark"
-                    style={{
-                      height: 'auto',
-                      maxHeight: '60px',
-                      objectFit: 'contain',
-                      filter: 'drop-shadow(2px 2px 0px var(--accent-red))'
-                    }}
-                  />
-                </div>
                 <h1
                   className="font-heading"
                   style={{
-                    fontSize: 'clamp(3rem, 7.5vw, 5.8rem)',
+                    fontSize: 'clamp(3.4rem, 8vw, 6.2rem)',
                     lineHeight: 0.92,
                     letterSpacing: '0.02em',
                     color: 'var(--text-primary)',
@@ -143,10 +131,7 @@ export default function Home() {
                   }}
                 >
                   DIGITAL ARTIST.<br />
-                  <span style={{ color: 'var(--accent-red)' }}>MANGA</span> ILLUSTRATOR.<br />
-                  <span className="font-hand" style={{ fontSize: 'clamp(1.8rem, 4vw, 3.2rem)', color: 'var(--accent-yellow)', textTransform: 'none' }}>
-                    professional doodler.
-                  </span>
+                  <span style={{ color: 'var(--accent-red)' }}>MANGA</span> ILLUSTRATOR.
                 </h1>
               </div>
 
