@@ -11,8 +11,8 @@ function sanitizeUrl(url) {
   return cleaned;
 }
 
-const rawUrl = import.meta.env.VITE_SUPABASE_URL;
-const rawAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const rawUrl = import.meta.env.VITE_SUPABASE_URL || 'https://zqsxohojxleuraazlzbf.supabase.co';
+const rawAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpxc3hvaG9qeGxldXJhYXpsemJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE2NDM4MjIsImV4cCI6MjEwNzIxOTgyMn0.neEOYoQ-TN5vlSsky_ETcSXWx4FAN61-s2lIK2y-8ro';
 
 const supabaseUrl = sanitizeUrl(rawUrl);
 const supabaseAnonKey = rawAnonKey ? rawAnonKey.trim().replace(/^['"]|['"]$/g, '') : '';

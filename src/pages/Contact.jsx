@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
-import { Mail, Send, CheckCircle2, AlertTriangle, RefreshCw, Sparkles, ExternalLink, ShieldCheck } from 'lucide-react';
-import { sendCommissionInquiry, isEmailJSConfigured } from '../utils/emailService';
+import { Mail, Send, CheckCircle2, AlertTriangle, RefreshCw, Sparkles, ExternalLink, ShieldCheck, Copy, Check } from 'lucide-react';
+import { sendCommissionInquiry, generateMailtoUrl, isEmailJSConfigured } from '../utils/emailService';
 import { supabase, isSupabaseConfigured } from '../utils/supabaseClient';
 import { COMMISSION_RATES } from './Commissions';
 import soundFx from '../utils/soundFx';
@@ -30,23 +30,37 @@ export default function Contact() {
   const [status, setStatus] = useState('idle'); // 'idle' | 'loading' | 'success' | 'error'
   const [errorMessage, setErrorMessage] = useState('');
   const [validationErrors, setValidationErrors] = useState({});
+  const [copiedEmail, setCopiedEmail] = useState(false);
+  const [dbSaved, setDbSaved] = useState(false);
+
+  // Strict email validation regex checking local part, @, domain, and 2+ char TLD
+  const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
 
   const validate = () => {
     const errors = {};
-    if (!formData.clientName.trim()) {
+    const trimmedName = formData.clientName.trim();
+    const trimmedEmail = formData.clientEmail.trim();
+
+    if (!trimmedName) {
       errors.clientName = 'Please provide your name or preferred nickname.';
+    } else if (trimmedName.length < 2) {
+      errors.clientName = 'Name must be at least 2 characters long.';
     }
-    if (!formData.clientEmail.trim()) {
-      errors.clientEmail = 'Please provide your email address.';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.clientEmail)) {
-      errors.clientEmail = 'Please enter a valid email address (e.g., name@domain.com).';
+
+    if (!trimmedEmail) {
+      errors.clientEmail = 'Please provide your real email address so Joshua can reply.';
+    } else if (!EMAIL_REGEX.test(trimmedEmail) || !trimmedEmail.includes('.')) {
+      errors.clientEmail = 'Please enter a valid email address (e.g., name@gmail.com).';
     }
+
     if (!formData.description.trim()) {
       errors.description = 'Please describe the character or artwork you would like Joshua to draw.';
+    } else if (formData.description.trim().length < 10) {
+      errors.description = 'Please provide at least a short description (10+ characters) of your idea.';
     }
+
     if (formData.referenceLinks.trim()) {
-      // If reference links provided, basic url pattern check
-      const links = formData.referenceLinks.split('\n').filter(Boolean);
+      const links = formData.referenceLinks.split('\n').map(l => l.trim()).filter(Boolean);
       for (const link of links) {
         if (!link.startsWith('http://') && !link.startsWith('https://')) {
           errors.referenceLinks = 'Reference links should begin with http:// or https:// (one per line).';
@@ -54,6 +68,7 @@ export default function Contact() {
         }
       }
     }
+
     if (!formData.agreedToTerms) {
       errors.agreedToTerms = 'You must agree to the commission policies & payment process (50% upfront).';
     }
@@ -65,6 +80,13 @@ export default function Contact() {
     return Object.keys(errors).length === 0;
   };
 
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText('joshualagare255@gmail.com');
+    setCopiedEmail(true);
+    soundFx.playPop();
+    setTimeout(() => setCopiedEmail(false), 2500);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validate()) return;
@@ -72,44 +94,71 @@ export default function Contact() {
     soundFx.playSlash();
     setStatus('loading');
     setErrorMessage('');
+    setDbSaved(false);
 
-    try {
-      // 1. Deliver via EmailJS
-      await sendCommissionInquiry(formData);
+    let savedToDb = false;
 
-      // 2. Also log to Supabase inquiries table if configured
-      if (isSupabaseConfigured && supabase) {
-        try {
-          await supabase.from('commission_inquiries').insert([
-            {
-              client_name: formData.clientName,
-              client_email: formData.clientEmail,
-              artwork_type: formData.artworkType,
-              currency: formData.currency,
-              estimated_price: formData.estimatedPrice,
-              description: formData.description,
-              reference_links: formData.referenceLinks,
-              deadline: formData.deadline,
-              additional_characters: formData.additionalCharacters,
-              detailed_background: formData.detailedBackground,
-              preferred_style: formData.preferredStyle,
-              notes: formData.notes,
-              status: 'new'
-            }
-          ]);
-        } catch (dbErr) {
-          console.warn('Inquiry saved to email but DB log skipped:', dbErr);
+    // 1. Always record in Supabase database so inquiry is never lost
+    if (isSupabaseConfigured && supabase) {
+      try {
+        const { error: dbError } = await supabase.from('commission_inquiries').insert([
+          {
+            client_name: formData.clientName.trim(),
+            client_email: formData.clientEmail.trim(),
+            artwork_type: formData.artworkType,
+            currency: formData.currency,
+            estimated_price: formData.estimatedPrice,
+            description: formData.description.trim(),
+            reference_links: formData.referenceLinks.trim(),
+            deadline: formData.deadline.trim(),
+            additional_characters: formData.additionalCharacters,
+            detailed_background: formData.detailedBackground,
+            preferred_style: formData.preferredStyle,
+            notes: formData.notes.trim(),
+            status: 'new'
+          }
+        ]);
+        if (!dbError) {
+          savedToDb = true;
+          setDbSaved(true);
+        } else {
+          console.warn('Supabase DB log returned error:', dbError);
         }
+      } catch (dbErr) {
+        console.warn('Could not record inquiry in Supabase:', dbErr);
       }
+    }
+
+    // 2. Transmit via EmailJS to joshualagare255@gmail.com
+    try {
+      await sendCommissionInquiry({
+        ...formData,
+        clientName: formData.clientName.trim(),
+        clientEmail: formData.clientEmail.trim()
+      });
 
       soundFx.playSuccess();
       setStatus('success');
     } catch (err) {
-      console.error('Submission failed:', err);
-      setStatus('error');
-      setErrorMessage(err.message || 'Failed to submit inquiry. Please try again or email directly.');
+      console.error('EmailJS submission failed:', err);
+
+      // If saved to DB, treat as partial success with mailto fallback
+      if (savedToDb) {
+        soundFx.playPop();
+        setStatus('error');
+        setErrorMessage(
+          'Your inquiry has been safely logged in Joshua’s database! However, the automated mail service encountered a connection delay. Please click below to open your email app and send your pre-filled inquiry directly to guarantee instant delivery.'
+        );
+      } else {
+        setStatus('error');
+        setErrorMessage(
+          err.message || 'Failed to transmit inquiry. Please click the button below to send your pre-filled details directly via your email client.'
+        );
+      }
     }
   };
+
+  const mailtoLink = generateMailtoUrl(formData);
 
   return (
     <div style={{ padding: 'clamp(2rem, 5vw, 4rem) 0' }}>
@@ -146,43 +195,65 @@ export default function Contact() {
             <span className="drafting-corner-mark-tr">+</span>
             <span className="drafting-corner-mark-bl">+</span>
             <span className="drafting-corner-mark-br">+</span>
+
             {status === 'success' ? (
               <div style={{ textAlign: 'center', padding: '3rem 1rem' }}>
                 <CheckCircle2 size={64} color="#22c55e" style={{ margin: '0 auto 1.5rem' }} />
+                <div className="manga-narrator-box manga-narrator-box-red" style={{ marginBottom: '0.8rem' }}>
+                  TRANSMISSION CONFIRMED
+                </div>
                 <h2 className="font-heading" style={{ fontSize: '2.5rem', marginBottom: '0.8rem' }}>
-                  INQUIRY TRANSMITTED!
+                  INQUIRY DELIVERED!
                 </h2>
-                <p style={{ color: 'var(--text-secondary)', fontSize: '1.05rem', lineHeight: '1.6', maxWidth: '480px', margin: '0 auto 2rem' }}>
-                  Thank you, <strong>{formData.clientName}</strong>! Your inquiry for a <strong>{formData.artworkType}</strong> has been sent directly to Joshua. Look out for an email response at <strong>{formData.clientEmail}</strong> within 24-48 hours.
+                <p style={{ color: 'var(--text-secondary)', fontSize: '1.05rem', lineHeight: '1.6', maxWidth: '520px', margin: '0 auto 1.5rem' }}>
+                  Thank you, <strong>{formData.clientName}</strong>! Your inquiry for a <strong>{formData.artworkType}</strong> has been transmitted directly to Joshua Lagare (<code style={{ color: 'var(--accent-red)' }}>joshualagare255@gmail.com</code>).
                 </p>
-                <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem' }}>
-                  <button
-                    onClick={() => {
-                      setStatus('idle');
-                      setFormData({
-                        clientName: '',
-                        clientEmail: '',
-                        artworkType: 'Half Body',
-                        currency: 'PHP',
-                        estimatedPrice: '₱500',
-                        description: '',
-                        referenceLinks: '',
-                        deadline: '',
-                        additionalCharacters: false,
-                        detailedBackground: false,
-                        preferredStyle: 'MHA / Kinetic Anime Style',
-                        notes: '',
-                        agreedToTerms: false,
-                        honeypot: ''
-                      });
-                    }}
-                    className="btn-manga"
+                <p style={{ color: 'var(--text-muted)', fontSize: '0.92rem', marginBottom: '2rem' }}>
+                  Joshua reviews all requests and will reply to your inbox at <strong>{formData.clientEmail}</strong> within 24–48 hours.
+                </p>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', maxWidth: '420px', margin: '0 auto' }}>
+                  {/* Backup mailto link for client peace of mind */}
+                  <a
+                    href={mailtoLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-manga btn-manga-yellow"
+                    style={{ padding: '0.75rem', fontSize: '0.95rem' }}
                   >
-                    SUBMIT ANOTHER INQUIRY
-                  </button>
-                  <Link to="/artworks" className="btn-manga btn-manga-secondary">
-                    BROWSE ARTWORKS
-                  </Link>
+                    <Mail size={16} /> OPEN COPY IN YOUR EMAIL APP
+                  </a>
+
+                  <div style={{ display: 'flex', gap: '0.8rem', justifyContent: 'center' }}>
+                    <button
+                      onClick={() => {
+                        setStatus('idle');
+                        setFormData({
+                          clientName: '',
+                          clientEmail: '',
+                          artworkType: 'Half Body',
+                          currency: 'PHP',
+                          estimatedPrice: '₱500',
+                          description: '',
+                          referenceLinks: '',
+                          deadline: '',
+                          additionalCharacters: false,
+                          detailedBackground: false,
+                          preferredStyle: 'MHA / Kinetic Anime Style',
+                          notes: '',
+                          agreedToTerms: false,
+                          honeypot: ''
+                        });
+                      }}
+                      className="btn-manga btn-manga-secondary"
+                      style={{ flex: 1, padding: '0.7rem' }}
+                    >
+                      NEW INQUIRY
+                    </button>
+                    <Link to="/artworks" className="btn-manga btn-manga-secondary" style={{ flex: 1, padding: '0.7rem' }}>
+                      GALLERY
+                    </Link>
+                  </div>
                 </div>
               </div>
             ) : (
@@ -202,20 +273,31 @@ export default function Contact() {
                 {status === 'error' && (
                   <div
                     style={{
-                      padding: '1rem 1.2rem',
-                      backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                      padding: '1.2rem',
+                      backgroundColor: 'rgba(230, 57, 70, 0.08)',
                       border: '2px solid var(--accent-red)',
-                      color: 'var(--text-primary)',
+                      boxShadow: '4px 4px 0px var(--accent-red)',
                       display: 'flex',
-                      alignItems: 'center',
+                      flexDirection: 'column',
                       gap: '0.8rem'
                     }}
                   >
-                    <AlertTriangle size={24} color="var(--accent-red)" />
-                    <div>
-                      <strong style={{ display: 'block', color: 'var(--accent-red)' }}>Submission Error</strong>
-                      <span style={{ fontSize: '0.9rem' }}>{errorMessage}</span>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                      <AlertTriangle size={20} color="var(--accent-red)" />
+                      <strong className="font-heading" style={{ fontSize: '1.2rem', color: 'var(--accent-red)' }}>
+                        EMAIL DELIVERY NOTICE
+                      </strong>
                     </div>
+                    <p style={{ fontSize: '0.9rem', color: 'var(--text-primary)', lineHeight: '1.5' }}>
+                      {errorMessage}
+                    </p>
+                    <a
+                      href={mailtoLink}
+                      className="btn-manga btn-manga-red"
+                      style={{ padding: '0.75rem 1rem', fontSize: '0.95rem', textDecoration: 'none', alignSelf: 'flex-start' }}
+                    >
+                      <Mail size={16} /> OPEN PRE-FILLED EMAIL IN GMAIL / MAIL APP
+                    </a>
                   </div>
                 )}
 
@@ -249,11 +331,11 @@ export default function Contact() {
 
                     <div>
                       <label className="font-mono" style={{ fontSize: '0.8rem', fontWeight: 700, display: 'block', marginBottom: '0.4rem' }}>
-                        EMAIL ADDRESS (FOR REPLY) *
+                        YOUR REAL EMAIL ADDRESS *
                       </label>
                       <input
                         type="email"
-                        placeholder="name@gmail.com"
+                        placeholder="yourname@gmail.com"
                         value={formData.clientEmail}
                         onChange={(e) => setFormData({ ...formData, clientEmail: e.target.value })}
                         style={{
@@ -264,9 +346,13 @@ export default function Contact() {
                           color: 'var(--text-primary)'
                         }}
                       />
-                      {validationErrors.clientEmail && (
+                      {validationErrors.clientEmail ? (
                         <span style={{ color: 'var(--accent-red)', fontSize: '0.75rem', marginTop: '0.2rem', display: 'block' }}>
                           {validationErrors.clientEmail}
+                        </span>
+                      ) : (
+                        <span style={{ color: 'var(--text-muted)', fontSize: '0.72rem', marginTop: '0.2rem', display: 'block', fontFamily: 'var(--font-mono)' }}>
+                          Joshua will reply directly to this address.
                         </span>
                       )}
                     </div>
@@ -428,23 +514,44 @@ export default function Contact() {
                   )}
                 </div>
 
-                {/* Submit Action */}
-                <button
-                  type="submit"
-                  disabled={status === 'loading'}
-                  className="btn-manga btn-manga-red"
-                  style={{ width: '100%', padding: '1rem', fontSize: '1.2rem' }}
-                >
-                  {status === 'loading' ? (
-                    <>
-                      <RefreshCw size={20} className="spinning" /> TRANSMITTING INQUIRY...
-                    </>
-                  ) : (
-                    <>
-                      <Send size={20} /> SUBMIT COMMISSION INQUIRY
-                    </>
-                  )}
-                </button>
+                {/* Submit Actions */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+                  <button
+                    type="submit"
+                    disabled={status === 'loading'}
+                    className="btn-manga btn-manga-red"
+                    style={{ width: '100%', padding: '1rem', fontSize: '1.2rem' }}
+                  >
+                    {status === 'loading' ? (
+                      <>
+                        <RefreshCw size={20} className="spinning" /> TRANSMITTING INQUIRY...
+                      </>
+                    ) : (
+                      <>
+                        <Send size={20} /> SUBMIT COMMISSION INQUIRY
+                      </>
+                    )}
+                  </button>
+
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', marginTop: '0.2rem' }}>
+                    <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>Prefer your email app?</span>
+                    <a
+                      href={mailtoLink}
+                      style={{
+                        color: 'var(--accent-yellow)',
+                        fontWeight: 700,
+                        fontSize: '0.85rem',
+                        fontFamily: 'var(--font-mono)',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '0.3rem',
+                        textDecoration: 'underline'
+                      }}
+                    >
+                      <Mail size={14} /> Open Pre-Filled Email Draft ↗
+                    </a>
+                  </div>
+                </div>
               </form>
             )}
           </div>
@@ -454,19 +561,59 @@ export default function Contact() {
             {/* Direct Contact Card */}
             <div className="manga-panel-card" style={{ padding: '2rem' }}>
               <span className="drafting-corner-mark-tl">+</span>
-              <div className="section-subtitle">DIRECT EMAIL FALLBACK</div>
+              <div className="section-subtitle">DIRECT EMAIL CHANNEL</div>
               <h3 className="font-heading" style={{ fontSize: '1.6rem', marginBottom: '0.8rem' }}>
-                PREFER DIRECT EMAIL?
+                DIRECT ARTIST INBOX
               </h3>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.92rem', marginBottom: '1.4rem' }}>
-                If you have large ZIP archives, PDF character documents, or prefer sending directly from your email client, feel free to write to Joshua at:
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.92rem', marginBottom: '1.2rem', lineHeight: '1.5' }}>
+                You can write directly to Joshua Lagare for inquiries, large character reference packages, or special project proposals:
               </p>
+
+              {/* Email Box with Copy Button */}
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  backgroundColor: 'var(--bg-secondary)',
+                  border: '1.5px solid var(--border-bold)',
+                  padding: '0.75rem 1rem',
+                  marginBottom: '1rem'
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', overflow: 'hidden' }}>
+                  <Mail size={16} color="var(--accent-red)" />
+                  <span className="font-mono" style={{ fontSize: '0.88rem', fontWeight: 700, color: 'var(--text-primary)' }}>
+                    joshualagare255@gmail.com
+                  </span>
+                </div>
+                <button
+                  type="button"
+                  onClick={handleCopyEmail}
+                  title="Copy email to clipboard"
+                  style={{
+                    backgroundColor: 'transparent',
+                    border: 'none',
+                    color: copiedEmail ? '#22c55e' : 'var(--text-muted)',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.3rem',
+                    fontSize: '0.75rem',
+                    fontFamily: 'var(--font-mono)'
+                  }}
+                >
+                  {copiedEmail ? <Check size={16} /> : <Copy size={16} />}
+                  <span>{copiedEmail ? 'COPIED!' : 'COPY'}</span>
+                </button>
+              </div>
+
               <a
-                href="mailto:joshualagare255@gmail.com"
+                href={mailtoLink}
                 className="btn-manga btn-manga-secondary"
                 style={{ width: '100%', padding: '0.8rem', fontSize: '0.95rem' }}
               >
-                <Mail size={16} color="var(--accent-yellow)" /> joshualagare255@gmail.com
+                <Mail size={16} color="var(--accent-yellow)" /> OPEN IN YOUR EMAIL APP
               </a>
             </div>
 
@@ -478,9 +625,22 @@ export default function Contact() {
                 <h4 className="font-heading" style={{ fontSize: '1.25rem' }}>OFFICIAL VERIFICATION</h4>
               </div>
               <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.8rem', fontSize: '0.88rem', color: 'var(--text-secondary)' }}>
-                <li>✓ Notification delivered directly to Joshua&apos;s verified inbox.</li>
-                <li>✓ No commission is confirmed until terms & slots are accepted.</li>
-                <li>✓ Payment sent only after slot agreement.</li>
+                <li style={{ display: 'flex', gap: '0.5rem', alignItems: 'flex-start' }}>
+                  <span style={{ color: '#22c55e', fontWeight: 'bold' }}>✓</span>
+                  <span>Delivered directly to Joshua&apos;s verified inbox (<code style={{ color: 'var(--text-primary)' }}>joshualagare255@gmail.com</code>).</span>
+                </li>
+                <li style={{ display: 'flex', gap: '0.5rem', alignItems: 'flex-start' }}>
+                  <span style={{ color: '#22c55e', fontWeight: 'bold' }}>✓</span>
+                  <span>Every inquiry is safely backed up to the artist database.</span>
+                </li>
+                <li style={{ display: 'flex', gap: '0.5rem', alignItems: 'flex-start' }}>
+                  <span style={{ color: '#22c55e', fontWeight: 'bold' }}>✓</span>
+                  <span>No payment is requested until slot availability and terms are confirmed.</span>
+                </li>
+                <li style={{ display: 'flex', gap: '0.5rem', alignItems: 'flex-start' }}>
+                  <span style={{ color: '#22c55e', fontWeight: 'bold' }}>✓</span>
+                  <span>Expected response time: within 24 to 48 hours.</span>
+                </li>
               </ul>
             </div>
           </div>
