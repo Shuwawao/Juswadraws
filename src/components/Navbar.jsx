@@ -170,7 +170,7 @@ export default function Navbar() {
               }}
               className="theme-toggle-btn"
             >
-              {isDark ? <Sun size={18} color="var(--accent-yellow)" /> : <Moon size={18} color="var(--accent-purple)" />}
+              {isDark ? <Sun size={18} color="var(--accent-yellow)" /> : <Moon size={18} color="var(--text-primary)" />}
             </button>
 
             {/* Mobile Hamburger Button */}

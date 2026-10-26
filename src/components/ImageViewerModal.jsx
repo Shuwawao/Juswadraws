@@ -242,7 +242,7 @@ export default function ImageViewerModal({
                 height: '44px',
                 border: '3px solid rgba(255, 255, 255, 0.15)',
                 borderTopColor: 'var(--accent-yellow)',
-                borderRightColor: 'var(--accent-purple)',
+                borderRightColor: 'var(--accent-red)',
                 borderRadius: '50%',
                 animation: 'spin 0.7s linear infinite'
               }}

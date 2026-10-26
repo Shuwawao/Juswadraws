@@ -174,7 +174,7 @@ export default function About() {
                 className="btn-manga btn-manga-secondary"
                 style={{ padding: '1rem' }}
               >
-                <Instagram size={18} color="var(--accent-purple)" />
+                <Instagram size={18} color="var(--accent-red)" />
                 <span>@juswa_draws</span>
               </a>
 
@@ -185,7 +185,7 @@ export default function About() {
                 className="btn-manga btn-manga-secondary"
                 style={{ padding: '1rem' }}
               >
-                <Instagram size={18} color="var(--accent-cyan)" />
+                <Instagram size={18} color="var(--accent-yellow)" />
                 <span>@shuwawao</span>
               </a>
 

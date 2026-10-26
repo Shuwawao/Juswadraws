@@ -278,7 +278,7 @@ export default function Admin() {
   if (loading) {
     return (
       <div style={{ padding: '6rem 0', textAlign: 'center' }}>
-        <RefreshCw size={36} className="spinning" style={{ margin: '0 auto 1rem', color: 'var(--accent-purple)' }} />
+        <RefreshCw size={36} className="spinning" style={{ margin: '0 auto 1rem', color: 'var(--accent-red)' }} />
         <p className="font-mono">VERIFYING ADMIN SESSION...</p>
       </div>
     );
@@ -297,7 +297,7 @@ export default function Admin() {
               padding: '2.5rem',
               backgroundColor: 'var(--bg-card)',
               border: '2px solid var(--text-primary)',
-              boxShadow: '8px 8px 0px var(--accent-purple)'
+              boxShadow: '8px 8px 0px var(--accent-red)'
             }}
           >
             <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
@@ -313,7 +313,7 @@ export default function Admin() {
                   margin: '0 auto 1rem'
                 }}
               >
-                <Lock size={26} color="var(--accent-purple)" />
+                <Lock size={26} color="var(--accent-red)" />
               </div>
               <h1 className="font-heading" style={{ fontSize: '2.2rem' }}>
                 ARTIST DASHBOARD
@@ -433,7 +433,7 @@ export default function Admin() {
         >
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-              <span className="tape-tag tape-tag-purple">ADMINISTRATOR</span>
+              <span className="tape-tag tape-tag-red">ADMINISTRATOR</span>
               <span className="font-mono" style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
                 {user.email}
               </span>
@@ -509,7 +509,7 @@ export default function Admin() {
 
             {loadingDoodles ? (
               <div style={{ textAlign: 'center', padding: '3rem' }}>
-                <RefreshCw size={28} className="spinning" style={{ margin: '0 auto', color: 'var(--accent-purple)' }} />
+                <RefreshCw size={28} className="spinning" style={{ margin: '0 auto', color: 'var(--accent-red)' }} />
               </div>
             ) : doodles.length === 0 ? (
               <div className="manga-panel" style={{ padding: '3rem', textAlign: 'center', color: 'var(--text-muted)' }}>
@@ -526,7 +526,7 @@ export default function Admin() {
                     <div>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <strong className="font-heading" style={{ fontSize: '1.2rem' }}>{item.nickname}</strong>
-                        <span className={`tape-tag ${item.status === 'approved' ? '' : item.status === 'rejected' ? 'tape-tag-red' : 'tape-tag-purple'}`}>
+                        <span className={`tape-tag ${item.status === 'approved' ? '' : item.status === 'rejected' ? 'tape-tag-red' : 'tape-tag-yellow'}`}>
                           {item.status.toUpperCase()}
                         </span>
                       </div>
@@ -585,7 +585,7 @@ export default function Admin() {
 
             {loadingInquiries ? (
               <div style={{ textAlign: 'center', padding: '3rem' }}>
-                <RefreshCw size={28} className="spinning" style={{ margin: '0 auto', color: 'var(--accent-purple)' }} />
+                <RefreshCw size={28} className="spinning" style={{ margin: '0 auto', color: 'var(--accent-red)' }} />
               </div>
             ) : inquiries.length === 0 ? (
               <div className="manga-panel" style={{ padding: '3rem', textAlign: 'center', color: 'var(--text-muted)' }}>
@@ -601,7 +601,7 @@ export default function Admin() {
                           <h3 className="font-heading" style={{ fontSize: '1.6rem' }}>{inq.client_name}</h3>
                           <span className="tape-tag">{inq.artwork_type}</span>
                         </div>
-                        <a href={`mailto:${inq.client_email}`} style={{ color: 'var(--accent-purple)', fontSize: '0.9rem', fontFamily: 'var(--font-mono)' }}>
+                        <a href={`mailto:${inq.client_email}`} style={{ color: 'var(--accent-red)', fontSize: '0.9rem', fontFamily: 'var(--font-mono)' }}>
                           {inq.client_email}
                         </a>
                       </div>
@@ -639,7 +639,7 @@ export default function Admin() {
                       {inq.reference_links && (
                         <div>
                           <span className="font-mono" style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>REFERENCES:</span>
-                          <p style={{ color: 'var(--accent-cyan)', fontSize: '0.85rem', wordBreak: 'break-all' }}>{inq.reference_links}</p>
+                          <p style={{ color: 'var(--accent-yellow)', fontSize: '0.85rem', wordBreak: 'break-all' }}>{inq.reference_links}</p>
                         </div>
                       )}
 
@@ -695,7 +695,6 @@ export default function Admin() {
                     <option value="commissioned-work">Commissioned Work</option>
                     <option value="personal-works">Personal Works</option>
                     <option value="sketches-and-studies">Sketches and Studies</option>
-                    <option value="my-photo">My Photo</option>
                   </select>
                 </div>
 
@@ -732,7 +731,7 @@ export default function Admin() {
                       type="checkbox"
                       checked={newArt.featured}
                       onChange={(e) => setNewArt({ ...newArt, featured: e.target.checked })}
-                      style={{ accentColor: 'var(--accent-purple)' }}
+                      style={{ accentColor: 'var(--accent-red)' }}
                     />
                     Featured
                   </label>
@@ -741,7 +740,7 @@ export default function Admin() {
                       type="checkbox"
                       checked={newArt.visible}
                       onChange={(e) => setNewArt({ ...newArt, visible: e.target.checked })}
-                      style={{ accentColor: 'var(--accent-purple)' }}
+                      style={{ accentColor: 'var(--accent-red)' }}
                     />
                     Visible
                   </label>
@@ -763,7 +762,7 @@ export default function Admin() {
 
             {loadingArtworks ? (
               <div style={{ textAlign: 'center', padding: '3rem' }}>
-                <RefreshCw size={28} className="spinning" style={{ margin: '0 auto', color: 'var(--accent-purple)' }} />
+                <RefreshCw size={28} className="spinning" style={{ margin: '0 auto', color: 'var(--accent-red)' }} />
               </div>
             ) : artworks.length === 0 ? (
               <div className="manga-panel" style={{ padding: '3rem', textAlign: 'center', color: 'var(--text-muted)' }}>

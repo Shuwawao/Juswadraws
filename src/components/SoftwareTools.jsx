@@ -114,7 +114,7 @@ export default function SoftwareTools() {
                 <h3 className="font-heading" style={{ fontSize: '1.5rem', marginBottom: '0.3rem', color: 'var(--text-primary)' }}>
                   {tool.name}
                 </h3>
-                <div className="font-mono" style={{ fontSize: '0.78rem', color: 'var(--accent-purple)', marginBottom: '0.8rem', fontWeight: 600 }}>
+                <div className="font-mono" style={{ fontSize: '0.78rem', color: 'var(--accent-red)', marginBottom: '0.8rem', fontWeight: 600 }}>
                   {tool.role}
                 </div>
                 <p style={{ color: 'var(--text-secondary)', fontSize: '0.88rem', lineHeight: '1.5' }}>

@@ -15,12 +15,6 @@ const CATEGORY_MAP = {
     subtitle: 'Client Commissions & Custom Character Illustrations',
     badge: 'CLIENT WORK'
   },
-  'my photo': {
-    id: 'my-photo',
-    name: 'My Photo',
-    subtitle: 'Original Self-Portraits, Personas & Brand Graphics',
-    badge: 'IDENTITY'
-  },
   'personal works': {
     id: 'personal-works',
     name: 'Personal Works',
@@ -39,9 +33,6 @@ const FEATURED_SELECTION = [
   'Adelynn 1.png',
   'final edgeunners.png',
   'Kristian_comms.png',
-  'juswa pogi.jpg',
-  'juswa-zoom-2.png',
-  'Untitled Design.png',
   'chainsaw man.png',
   'CHARACTER SHEET2.png',
   'Hyakkimaru.png',
@@ -69,12 +60,9 @@ function generateManifest() {
     const folderPath = path.join(artworksDir, folder);
     if (!fs.statSync(folderPath).isDirectory()) continue;
 
-    const categoryMeta = CATEGORY_MAP[folder.toLowerCase()] || {
-      id: folder.toLowerCase().replace(/\s+/g, '-'),
-      name: folder,
-      subtitle: '',
-      badge: 'ART'
-    };
+    // Exclude folders not in CATEGORY_MAP (e.g. 'my photo')
+    const categoryMeta = CATEGORY_MAP[folder.toLowerCase()];
+    if (!categoryMeta) continue;
 
     const files = fs.readdirSync(folderPath);
     for (const file of files) {
@@ -97,7 +85,7 @@ function generateManifest() {
         title,
         url,
         isFeatured,
-        isBrandAsset: folder.toLowerCase() === 'my photo' && (file === 'favicon.png' || file === 'juswa-font.png'),
+        isBrandAsset: false,
         tags: [categoryMeta.name, ext.replace('.', '').toUpperCase()]
       });
     }
@@ -116,7 +104,7 @@ export default ARTWORKS;
 
   fs.mkdirSync(path.dirname(outputFile), { recursive: true });
   fs.writeFileSync(outputFile, fileContent, 'utf-8');
-  console.log(`Successfully generated manifest with ${artworks.length} artworks!`);
+  console.log(`Successfully generated manifest with ${artworks.length} artworks across ${Object.keys(CATEGORY_MAP).length} categories!`);
 }
 
 generateManifest();

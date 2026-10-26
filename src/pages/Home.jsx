@@ -10,9 +10,7 @@ export default function Home() {
   const [selectedArtwork, setSelectedArtwork] = useState(null);
 
   // Curate 6 high-impact featured works for the home gallery showcase
-  const featuredWorks = ARTWORKS.filter(
-    (a) => a.isFeatured && a.categoryId !== 'my-photo'
-  ).slice(0, 6);
+  const featuredWorks = ARTWORKS.filter((a) => a.isFeatured).slice(0, 6);
 
   const openViewer = (art) => {
     setSelectedArtwork(art);
@@ -567,8 +565,8 @@ export default function Home() {
                 }}
               >
                 <img
-                  src="/artworks/my%20photo/juswa pogi.jpg"
-                  alt="Joshua Lagare (JUSWADRAWS Self Portrait)"
+                  src="/artworks/personal%20works/CHARACTER%20SHEET2.png"
+                  alt="Joshua Lagare (JUSWADRAWS Signature Character Illustration)"
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
 

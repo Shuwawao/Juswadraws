@@ -62,7 +62,7 @@ export default function Footer() {
                   fontFamily: 'var(--font-mono)'
                 }}
               >
-                <Instagram size={18} color="var(--accent-purple)" />
+                <Instagram size={18} color="var(--accent-red)" />
                 <span>@juswa_draws (Art Account)</span>
                 <ArrowUpRight size={14} color="var(--text-muted)" />
               </a>
@@ -80,7 +80,7 @@ export default function Footer() {
                   fontFamily: 'var(--font-mono)'
                 }}
               >
-                <Instagram size={18} color="var(--accent-cyan)" />
+                <Instagram size={18} color="var(--accent-yellow)" />
                 <span>@shuwawao (Personal Account)</span>
                 <ArrowUpRight size={14} color="var(--text-muted)" />
               </a>
@@ -157,7 +157,7 @@ export default function Footer() {
                   gap: '0.3rem'
                 }}
               >
-                <ShieldCheck size={14} color="var(--accent-purple)" />
+                <ShieldCheck size={14} color="var(--accent-yellow)" />
                 <span>Artist Admin</span>
               </Link>
             </div>

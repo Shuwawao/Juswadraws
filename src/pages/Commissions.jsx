@@ -665,7 +665,7 @@ export default function Commissions() {
             <div className="manga-panel-card" style={{ padding: '1.8rem' }}>
               <span className="drafting-corner-mark-tl">+</span>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1rem' }}>
-                <Clock size={22} color="var(--accent-cyan)" />
+                <Clock size={22} color="var(--accent-yellow)" />
                 <h3 className="font-heading" style={{ fontSize: '1.4rem' }}>TURNAROUND TIME</h3>
               </div>
               <p style={{ color: 'var(--text-secondary)', fontSize: '0.92rem', lineHeight: '1.6' }}>

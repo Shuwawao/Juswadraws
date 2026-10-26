@@ -29,7 +29,7 @@ import soundFx from '../utils/soundFx';
 const PALETTE = [
   { name: 'Ink Black', color: '#0a0a0e' },
   { name: 'Pure White', color: '#ffffff' },
-  { name: 'Ultraviolet', color: '#9d4edd' },
+  { name: 'Deep Crimson', color: '#dc2626' },
   { name: 'Highlighter Yellow', color: '#facc15' },
   { name: 'Blood Crimson', color: '#ef4444' },
   { name: 'Neon Cyan', color: '#06b6d4' },
@@ -454,8 +454,8 @@ export default function SketchWall() {
                     height: '28px',
                     borderRadius: '50%',
                     backgroundColor: p.color,
-                    border: brushColor === p.color && !isEraser ? '3px solid var(--accent-purple)' : '1px solid rgba(0,0,0,0.3)',
-                    boxShadow: brushColor === p.color && !isEraser ? '0 0 8px var(--accent-purple)' : 'none',
+                    border: brushColor === p.color && !isEraser ? '3px solid var(--accent-red)' : '1px solid rgba(0,0,0,0.3)',
+                    boxShadow: brushColor === p.color && !isEraser ? '0 0 8px var(--accent-red)' : 'none',
                     transform: brushColor === p.color && !isEraser ? 'scale(1.15)' : 'scale(1)',
                     transition: 'transform 0.15s ease'
                   }}
@@ -699,7 +699,7 @@ export default function SketchWall() {
 
           {isLoadingDoodles ? (
             <div style={{ textAlign: 'center', padding: '4rem 1rem' }}>
-              <RefreshCw size={36} className="spinning" style={{ margin: '0 auto 1rem', color: 'var(--accent-purple)' }} />
+              <RefreshCw size={36} className="spinning" style={{ margin: '0 auto 1rem', color: 'var(--accent-red)' }} />
               <p className="font-mono">LOADING COMMUNITY DOODLES...</p>
             </div>
           ) : wallError ? (
@@ -712,7 +712,7 @@ export default function SketchWall() {
             </div>
           ) : approvedDoodles.length === 0 ? (
             <div className="manga-panel" style={{ padding: '4rem 2rem', textAlign: 'center' }}>
-              <Sparkles size={48} color="var(--accent-purple)" style={{ margin: '0 auto 1rem' }} />
+              <Sparkles size={48} color="var(--accent-yellow)" style={{ margin: '0 auto 1rem' }} />
               <h3 className="font-heading" style={{ fontSize: '1.8rem', marginBottom: '0.5rem' }}>
                 BE THE FIRST TO DOODLE!
               </h3>
@@ -816,7 +816,7 @@ export default function SketchWall() {
 
                     <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', marginTop: '0.4rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                       <span>{new Date(item.created_at).toLocaleDateString()}</span>
-                      <span style={{ color: 'var(--accent-purple)' }}>Click to open ↗</span>
+                      <span style={{ color: 'var(--accent-red)' }}>Click to open ↗</span>
                     </div>
                   </div>
                 </div>
@@ -946,7 +946,7 @@ export default function SketchWall() {
                     alignItems: 'center',
                     justifyContent: 'center',
                     cursor: 'pointer',
-                    boxShadow: '3px 3px 0px var(--accent-purple)'
+                    boxShadow: '3px 3px 0px var(--accent-red)'
                   }}
                 >
                   <ChevronLeft size={26} />
@@ -960,7 +960,7 @@ export default function SketchWall() {
                   backgroundColor: '#ffffff',
                   padding: 'clamp(0.75rem, 2vw, 1.5rem)',
                   border: '3px solid var(--text-primary)',
-                  boxShadow: '0 12px 48px rgba(0, 0, 0, 0.85), 8px 8px 0px var(--accent-purple)',
+                  boxShadow: '0 12px 48px rgba(0, 0, 0, 0.85), 8px 8px 0px var(--accent-red)',
                   maxWidth: '92vw',
                   maxHeight: '100%',
                   display: 'flex',
@@ -1001,7 +1001,7 @@ export default function SketchWall() {
                     alignItems: 'center',
                     justifyContent: 'center',
                     cursor: 'pointer',
-                    boxShadow: '3px 3px 0px var(--accent-purple)'
+                    boxShadow: '3px 3px 0px var(--accent-red)'
                   }}
                 >
                   <ChevronRight size={26} />

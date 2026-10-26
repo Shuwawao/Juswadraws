@@ -415,10 +415,10 @@ export default function Contact() {
                       type="checkbox"
                       checked={formData.agreedToTerms}
                       onChange={(e) => setFormData({ ...formData, agreedToTerms: e.target.checked })}
-                      style={{ marginTop: '0.2rem', width: '18px', height: '18px', accentColor: 'var(--accent-purple)' }}
+                      style={{ marginTop: '0.2rem', width: '18px', height: '18px', accentColor: 'var(--accent-red)' }}
                     />
                     <div style={{ fontSize: '0.88rem', color: 'var(--text-secondary)' }}>
-                      I agree to the <Link to="/commissions" target="_blank" style={{ color: 'var(--accent-purple)', textDecoration: 'underline' }}>commission policies</Link>: 50% downpayment before sketch phase, expected ~1 week turnaround, and balance due before final delivery.
+                      I agree to the <Link to="/commissions" target="_blank" style={{ color: 'var(--accent-red)', textDecoration: 'underline' }}>commission policies</Link>: 50% downpayment before sketch phase, expected ~1 week turnaround, and balance due before final delivery.
                     </div>
                   </label>
                   {validationErrors.agreedToTerms && (

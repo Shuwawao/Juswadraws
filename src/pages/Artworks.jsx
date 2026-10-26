@@ -81,8 +81,7 @@ export default function Artworks() {
   // Filter artworks by category and search query
   const filteredArtworks = useMemo(() => {
     return allArtworks.filter((art) => {
-      // Don't show brand favicon or font asset in general art grid unless selected
-      if (art.isBrandAsset && activeCategory !== 'my-photo') return false;
+      if (art.isBrandAsset) return false;
 
       const matchesCategory =
         activeCategory === 'all' || art.categoryId === activeCategory;

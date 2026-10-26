@@ -1,6 +1,6 @@
 /* ========================================================
    JUSWADRAWS — DESIGN SYSTEM & THEME TOKENS
-   Gritty Anime Energy × Editorial Direction × Artist Playground
+   Manga Black & White × Kinetic Red & Energetic Yellow Accents
    ======================================================== */
 
 :root {
@@ -12,14 +12,19 @@
   --font-mono: 'JetBrains Mono', monospace;
   --font-hand: 'Permanent Marker', cursive;
 
-  /* Universal Accent Palette (Gritty Anime Inspired) */
-  --accent-purple: #9d4edd;
-  --accent-purple-glow: rgba(157, 78, 221, 0.35);
-  --accent-yellow: #f59e0b;
-  --accent-yellow-tape: #facc15;
+  /* Universal Accent Palette (Manga Red & Yellow Direction) */
   --accent-red: #e63946;
+  --accent-red-hover: #d62828;
   --accent-red-glow: rgba(230, 57, 70, 0.35);
-  --accent-cyan: #06b6d4;
+  --accent-yellow: #facc15;
+  --accent-yellow-dark: #eab308;
+  --accent-yellow-tape: #facc15;
+  --accent-yellow-glow: rgba(250, 204, 21, 0.35);
+
+  /* Purged purple: fallback mapped directly to red/yellow accents */
+  --accent-purple: var(--accent-red);
+  --accent-purple-glow: var(--accent-red-glow);
+  --accent-cyan: var(--accent-yellow);
 
   /* Manga Layout System */
   --manga-panel-border-width: 2.5px;
@@ -40,7 +45,7 @@
 }
 
 /* ========================================================
-   DARK THEME (Default) — Near-black Charcoal & Graphite
+   DARK THEME — Near-black Charcoal & Manga Ink
    ======================================================== */
 [data-theme='dark'] {
   --bg-primary: #0a0a0e;
@@ -59,7 +64,7 @@
   --border-color: #272736;
   --border-subtle: #1e1e2b;
   --border-bold: #414156;
-  --border-accent: #9d4edd;
+  --border-accent: var(--accent-red);
 
   --screentone-color: rgba(255, 255, 255, 0.04);
   --screentone-dense: rgba(255, 255, 255, 0.08);
@@ -67,7 +72,7 @@
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
   --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.6);
   --shadow-pop: 4px 4px 0px #000000;
-  --shadow-anime: 6px 6px 0px #9d4edd;
+  --shadow-anime: 6px 6px 0px var(--accent-red);
 
   --badge-bg: #1f1f2e;
   --badge-text: #e2e2ec;
@@ -86,7 +91,7 @@
 }
 
 /* ========================================================
-   LIGHT THEME — Warm Paper White & Newsprint Canvas
+   LIGHT THEME (Default) — Warm Paper White & Newsprint Canvas
    ======================================================== */
 [data-theme='light'] {
   --bg-primary: #f6f4ee;
@@ -105,7 +110,7 @@
   --border-color: #d4cec0;
   --border-subtle: #e2dcd0;
   --border-bold: #121216;
-  --border-accent: #7928ca;
+  --border-accent: var(--accent-red);
 
   --screentone-color: rgba(0, 0, 0, 0.04);
   --screentone-dense: rgba(0, 0, 0, 0.08);
@@ -113,7 +118,7 @@
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
   --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.1);
   --shadow-pop: 4px 4px 0px #121216;
-  --shadow-anime: 6px 6px 0px #121216;
+  --shadow-anime: 6px 6px 0px var(--accent-red);
 
   --badge-bg: #eae6db;
   --badge-text: #121216;
