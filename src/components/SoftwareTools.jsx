@@ -1,5 +1,4 @@
 import React from 'react';
-import { Cpu, Terminal, Palette, PenTool } from 'lucide-react';
 
 export default function SoftwareTools() {
   const tools = [
@@ -9,14 +8,8 @@ export default function SoftwareTools() {
       desc: 'Mastery over G-pen stabilization, screentones, line weights, and dynamic anime action poses.',
       color: '#00a0e9',
       tag: 'DAILY DRIVER',
-      // Stylized CSP Logo SVG
-      iconSvg: (
-        <svg viewBox="0 0 48 48" width="36" height="36" fill="currentColor">
-          <circle cx="24" cy="24" r="22" fill="#00a0e9" />
-          <path d="M14 26c0-6 5-11 11-11 4 0 7 2 9 5l-4 3c-1-2-3-3-5-3-3.3 0-6 2.7-6 6s2.7 6 6 6c2 0 4-1 5-3l4 3c-2 3-5 5-9 5-6 0-11-5-11-11z" fill="#ffffff" />
-          <path d="M26 18l6-6 4 4-6 6z" fill="#ffd100" />
-        </svg>
-      )
+      iconSrc: '/images/tools/clip-studio-paint.png',
+      iconAlt: 'Clip Studio Paint official application icon'
     },
     {
       name: 'KRITA',
@@ -24,15 +17,8 @@ export default function SoftwareTools() {
       desc: 'Extensive use of custom textured brushes, color smudge dynamics, and expressive rough concept studies.',
       color: '#3498db',
       tag: 'STUDY & TEXTURE',
-      iconSvg: (
-        <svg viewBox="0 0 48 48" width="36" height="36" fill="currentColor">
-          <circle cx="24" cy="24" r="22" fill="#2c3e50" />
-          <circle cx="20" cy="22" r="12" fill="#3498db" />
-          <circle cx="28" cy="26" r="10" fill="#e74c3c" />
-          <circle cx="22" cy="30" r="8" fill="#f1c40f" />
-          <path d="M14 14l20 20" stroke="#ffffff" strokeWidth="4" strokeLinecap="round" />
-        </svg>
-      )
+      iconSrc: '/images/tools/krita.svg',
+      iconAlt: 'Krita official application icon'
     },
     {
       name: 'ADOBE PHOTOSHOP',
@@ -40,12 +26,8 @@ export default function SoftwareTools() {
       desc: 'Halftone screening, chromatic aberration, grain overlay, levels, and publication-ready finishes.',
       color: '#31a8ff',
       tag: 'POST-PRODUCTION',
-      iconSvg: (
-        <svg viewBox="0 0 48 48" width="36" height="36" fill="currentColor">
-          <rect width="44" height="44" x="2" y="2" rx="8" fill="#001e36" stroke="#31a8ff" strokeWidth="2" />
-          <text x="12" y="32" fill="#31a8ff" fontSize="24" fontWeight="bold" fontFamily="sans-serif">Ps</text>
-        </svg>
-      )
+      iconSrc: '/images/tools/photoshop.svg',
+      iconAlt: 'Adobe Photoshop official application icon'
     },
     {
       name: 'MAGMA',
@@ -53,13 +35,8 @@ export default function SoftwareTools() {
       desc: 'Real-time collaborative drawing sessions, speed sketching with other artists, and community stream jams.',
       color: '#ff4757',
       tag: 'COLLAB & SPEED',
-      iconSvg: (
-        <svg viewBox="0 0 48 48" width="36" height="36" fill="currentColor">
-          <circle cx="24" cy="24" r="22" fill="#ff4757" />
-          <path d="M14 34L24 14L34 34L28 34L24 24L20 34Z" fill="#ffffff" />
-          <circle cx="24" cy="28" r="3" fill="#ffeaa7" />
-        </svg>
-      )
+      iconSrc: '/images/tools/magma.png',
+      iconAlt: 'Magma official application icon'
     }
   ];
 
@@ -103,8 +80,28 @@ export default function SoftwareTools() {
               <span className="drafting-corner-mark-br">+</span>
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.2rem' }}>
-                  <div style={{ filter: 'drop-shadow(2px 2px 0px rgba(0,0,0,0.5))' }}>
-                    {tool.iconSvg}
+                  <div
+                    style={{
+                      width: '42px',
+                      height: '42px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      borderRadius: '8px',
+                      overflow: 'hidden',
+                      filter: 'drop-shadow(2px 2px 0px rgba(0,0,0,0.35))'
+                    }}
+                  >
+                    <img
+                      src={tool.iconSrc}
+                      alt={tool.iconAlt}
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'contain'
+                      }}
+                      loading="lazy"
+                    />
                   </div>
                   <span className="tape-tag" style={{ fontSize: '0.68rem' }}>
                     {tool.tag}
