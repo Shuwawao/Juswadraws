@@ -67,7 +67,12 @@ export default function SoftwareTools() {
     <section style={{ padding: '5rem 0', position: 'relative' }}>
       <div className="container">
         <div style={{ marginBottom: '2.5rem' }}>
-          <div className="section-subtitle">WEAPONS OF CHOICE</div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
+            <div className="speech-bubble">
+              <span>MANUSCRIPT TOOLS</span>
+            </div>
+            <div className="section-subtitle" style={{ margin: 0 }}>STUDIO GEAR & SOFTWARE</div>
+          </div>
           <h2 className="section-title">MY TOOLS OF THE TRADE</h2>
           <p style={{ color: 'var(--text-secondary)', marginTop: '0.6rem', maxWidth: '600px' }}>
             From high-octane lineart to gritty textures and color grading, these are the software packages powering my digital illustration workflow.
@@ -84,15 +89,18 @@ export default function SoftwareTools() {
           {tools.map((tool, idx) => (
             <div
               key={tool.name}
-              className="manga-panel"
+              className="manga-panel-card"
               style={{
                 padding: '1.8rem',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
-                borderLeft: `4px solid ${tool.color}`
+                borderLeft: `5px solid ${tool.color}`,
+                position: 'relative'
               }}
             >
+              <span className="drafting-corner-mark-tr">+</span>
+              <span className="drafting-corner-mark-br">+</span>
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.2rem' }}>
                   <div style={{ filter: 'drop-shadow(2px 2px 0px rgba(0,0,0,0.5))' }}>

@@ -17,8 +17,14 @@
   --accent-purple-glow: rgba(157, 78, 221, 0.35);
   --accent-yellow: #f59e0b;
   --accent-yellow-tape: #facc15;
-  --accent-red: #ef4444;
+  --accent-red: #e63946;
+  --accent-red-glow: rgba(230, 57, 70, 0.35);
   --accent-cyan: #06b6d4;
+
+  /* Manga Layout System */
+  --manga-panel-border-width: 2.5px;
+  --manga-gutter: 1.25rem;
+  --manga-gutter-lg: 2rem;
 
   /* Spacing & Layout */
   --container-max: 1400px;
@@ -65,6 +71,18 @@
 
   --badge-bg: #1f1f2e;
   --badge-text: #e2e2ec;
+
+  /* Manga Ink System (Dark Mode) */
+  --manga-ink: #f8f8f2;
+  --manga-paper: #0a0a0e;
+  --manga-panel-bg: #121218;
+  --manga-panel-border: #313142;
+  --manga-panel-border-bold: #f8f8f2;
+  --speech-bg: #ffffff;
+  --speech-text: #0a0a0e;
+  --speech-border: #0a0a0e;
+  --drafting-blue: #38bdf8;
+  --manga-speedline-overlay: rgba(255, 255, 255, 0.03);
 }
 
 /* ========================================================
@@ -99,4 +117,16 @@
 
   --badge-bg: #eae6db;
   --badge-text: #121216;
+
+  /* Manga Ink System (Light Mode) */
+  --manga-ink: #121216;
+  --manga-paper: #f6f4ee;
+  --manga-panel-bg: #ffffff;
+  --manga-panel-border: #121216;
+  --manga-panel-border-bold: #0a0a0e;
+  --speech-bg: #ffffff;
+  --speech-text: #0a0a0e;
+  --speech-border: #0a0a0e;
+  --drafting-blue: #0284c7;
+  --manga-speedline-overlay: rgba(0, 0, 0, 0.03);
 }

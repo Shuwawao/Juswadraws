@@ -148,9 +148,14 @@ export default function Commissions() {
       <div className="container">
         {/* Header & Status Indicator */}
         <div style={{ marginBottom: '3.5rem' }}>
-          <div className="section-subtitle">COMMISSION STATION // 03</div>
+          <div className="section-subtitle">COMMISSION STATION // OFFICIAL MANGA RATES</div>
           <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '1rem', justifyContent: 'space-between' }}>
-            <h1 className="section-title">COMMISSIONS & PRICING</h1>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+              <h1 className="section-title">COMMISSIONS & PRICING</h1>
+              <div className="speech-bubble">
+                <span>{isAvailable ? '✦ COMMISSIONS OPEN' : 'QUEUES FULL'}</span>
+              </div>
+            </div>
 
             {/* Live Availability Badge */}
             <div
@@ -160,7 +165,7 @@ export default function Commissions() {
                 gap: '0.6rem',
                 padding: '0.55rem 1.2rem',
                 backgroundColor: isAvailable ? 'rgba(34, 197, 94, 0.12)' : 'rgba(239, 68, 68, 0.12)',
-                border: `2px solid ${isAvailable ? '#22c55e' : '#ef4444'}`,
+                border: `2.5px solid ${isAvailable ? '#22c55e' : '#ef4444'}`,
                 boxShadow: `3px 3px 0px ${isAvailable ? '#22c55e' : '#ef4444'}`
               }}
             >
@@ -173,7 +178,7 @@ export default function Commissions() {
                 }}
               />
               <span className="font-heading" style={{ fontSize: '1.1rem', color: isAvailable ? '#22c55e' : '#ef4444' }}>
-                {isAvailable ? 'COMMISSIONS: OPEN' : 'COMMISSIONS: CURRENTLY CLOSED'}
+                {isAvailable ? 'COMMISSIONS: ONLINE // OPEN' : 'COMMISSIONS: CURRENTLY CLOSED'}
               </span>
             </div>
           </div>
@@ -213,7 +218,7 @@ export default function Commissions() {
                 soundFx.playPop();
               }}
               onMouseEnter={() => soundFx.playHover()}
-              className={currency === 'PHP' ? 'btn-manga' : 'btn-manga btn-manga-secondary'}
+              className={currency === 'PHP' ? 'btn-manga btn-manga-red' : 'btn-manga btn-manga-secondary'}
               style={{ padding: '0.45rem 1.2rem', fontSize: '1rem' }}
             >
               PHP (₱)
@@ -224,7 +229,7 @@ export default function Commissions() {
                 soundFx.playPop();
               }}
               onMouseEnter={() => soundFx.playHover()}
-              className={currency === 'USD' ? 'btn-manga' : 'btn-manga btn-manga-secondary'}
+              className={currency === 'USD' ? 'btn-manga btn-manga-red' : 'btn-manga btn-manga-secondary'}
               style={{ padding: '0.45rem 1.2rem', fontSize: '1rem' }}
             >
               USD ($)
@@ -232,7 +237,7 @@ export default function Commissions() {
           </div>
         </div>
 
-        {/* Pricing Cards Grid */}
+        {/* Pricing Cards Grid (Manga Chapter Tiers) */}
         <div
           style={{
             display: 'grid',
@@ -248,26 +253,30 @@ export default function Commissions() {
             return (
               <div
                 key={rate.id}
-                className="manga-panel commission-card-entry"
+                className="manga-panel-card commission-card-entry"
                 style={{
                   padding: '2rem',
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'space-between',
-                  border: isSelected ? '2px solid var(--accent-purple)' : '1px solid var(--border-color)',
-                  boxShadow: isSelected ? '6px 6px 0px var(--accent-purple)' : 'var(--shadow-pop)',
+                  border: isSelected ? '2.5px solid var(--accent-red)' : '2.5px solid var(--text-primary)',
+                  boxShadow: isSelected ? '6px 6px 0px var(--accent-red)' : '4px 4px 0px var(--text-primary)',
                   position: 'relative',
                   backgroundColor: 'var(--bg-card)',
                   animationDelay: `${rIdx * 0.08}s`
                 }}
               >
+                {/* Technical Corner Marks */}
+                <span className="drafting-corner-mark-tl">+</span>
+                <span className="drafting-corner-mark-tr">+</span>
+
                 <div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                    <span className="tape-tag" style={{ fontSize: '0.68rem' }}>
+                    <span className="manga-narrator-box">
                       {rate.tag}
                     </span>
-                    <span className="font-mono" style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-                      TIER
+                    <span className="font-mono" style={{ fontSize: '0.75rem', color: isSelected ? 'var(--accent-red)' : 'var(--text-muted)', fontWeight: 700 }}>
+                      TIER 0{rIdx + 1}
                     </span>
                   </div>
 
@@ -306,7 +315,7 @@ export default function Commissions() {
                       if (estimatorEl) estimatorEl.scrollIntoView({ behavior: 'smooth' });
                     }}
                     onMouseEnter={() => soundFx.playHover()}
-                    className={isSelected ? 'btn-manga' : 'btn-manga btn-manga-secondary'}
+                    className={isSelected ? 'btn-manga btn-manga-red' : 'btn-manga btn-manga-secondary'}
                     style={{ width: '100%', fontSize: '0.95rem', padding: '0.6rem' }}
                   >
                     {isSelected ? '✓ SELECTED IN ESTIMATOR' : 'SELECT & ESTIMATE'}
@@ -318,21 +327,88 @@ export default function Commissions() {
         </div>
 
         {/* ========================================================
+            MANGAKA PRODUCTION PIPELINE (Inspired by Reference 4 Blueprint)
+            ======================================================== */}
+        <section style={{ marginBottom: '5rem' }}>
+          <div style={{ marginBottom: '2.5rem' }}>
+            <div className="section-subtitle">WORKFLOW BLUEPRINT // 5 PRODUCTION STAGES</div>
+            <h2 className="section-title">THE PRODUCTION PIPELINE</h2>
+            <p style={{ color: 'var(--text-secondary)', maxWidth: '640px', marginTop: '0.5rem' }}>
+              From initial reference brief to final high-resolution deliverable, every commission follows a disciplined mangaka manuscript workflow.
+            </p>
+          </div>
+
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+              gap: '1.25rem'
+            }}
+          >
+            <div className="manga-stage-card">
+              <span className="manga-step-num">01</span>
+              <h3 className="font-heading" style={{ fontSize: '1.25rem', marginBottom: '0.4rem' }}>SOURCE MATERIAL</h3>
+              <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+                Client submits character references, preferred poses, costume breakdown, and mood inspirations.
+              </p>
+            </div>
+
+            <div className="manga-stage-card">
+              <span className="manga-step-num">02</span>
+              <h3 className="font-heading" style={{ fontSize: '1.25rem', marginBottom: '0.4rem' }}>ROUGH STORYBOARD</h3>
+              <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+                Joshua creates rough composition thumbnails and pose sketches for your initial approval.
+              </p>
+            </div>
+
+            <div className="manga-stage-card">
+              <span className="manga-step-num">03</span>
+              <h3 className="font-heading" style={{ fontSize: '1.25rem', marginBottom: '0.4rem' }}>INKING & LINEART</h3>
+              <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+                Dynamic digital ink linework is rendered with authentic pen pressure and expressive anatomy.
+              </p>
+            </div>
+
+            <div className="manga-stage-card">
+              <span className="manga-step-num">04</span>
+              <h3 className="font-heading" style={{ fontSize: '1.25rem', marginBottom: '0.4rem' }}>SCREENTONES & COLOR</h3>
+              <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+                Halftone screentones, cel shading, atmospheric lighting, and effects are layered in.
+              </p>
+            </div>
+
+            <div className="manga-stage-card">
+              <span className="manga-step-num">05</span>
+              <h3 className="font-heading" style={{ fontSize: '1.25rem', marginBottom: '0.4rem' }}>FINAL EXPORT READY</h3>
+              <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+                Final high-resolution 300+ DPI PNG export delivered with full personal display permissions.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* ========================================================
             INTERACTIVE PRICE ESTIMATOR
             ======================================================== */}
         <section
           id="price-estimator"
-          className="manga-panel cut-corner"
+          className="manga-panel-card cut-corner"
           style={{
             padding: 'clamp(2rem, 5vw, 3.5rem)',
             backgroundColor: 'var(--bg-secondary)',
-            border: '2px solid var(--text-primary)',
-            boxShadow: '8px 8px 0px var(--accent-purple)',
-            marginBottom: '5rem'
+            border: '2.5px solid var(--text-primary)',
+            boxShadow: '8px 8px 0px var(--accent-red)',
+            marginBottom: '5rem',
+            position: 'relative'
           }}
         >
+          <span className="drafting-corner-mark-tl">+</span>
+          <span className="drafting-corner-mark-tr">+</span>
+          <span className="drafting-corner-mark-bl">+</span>
+          <span className="drafting-corner-mark-br">+</span>
+
           <div style={{ marginBottom: '2rem' }}>
-            <div className="section-subtitle">CONFIGURATOR // REAL-TIME</div>
+            <div className="section-subtitle">CONFIGURATOR // REAL-TIME CALCULATION</div>
             <h2 className="font-heading" style={{ fontSize: '2.5rem' }}>
               INTERACTIVE COMMISSION ESTIMATOR
             </h2>
@@ -405,7 +481,7 @@ export default function Commissions() {
                       setAdditionalCharacters(e.target.checked);
                       soundFx.playPop();
                     }}
-                    style={{ width: '18px', height: '18px', accentColor: 'var(--accent-purple)' }}
+                    style={{ width: '18px', height: '18px', accentColor: 'var(--accent-red)' }}
                   />
                   <div>
                     <span style={{ fontWeight: 600 }}>Additional Characters (+1 or more)</span>
@@ -433,7 +509,7 @@ export default function Commissions() {
                       setDetailedBackground(e.target.checked);
                       soundFx.playPop();
                     }}
-                    style={{ width: '18px', height: '18px', accentColor: 'var(--accent-purple)' }}
+                    style={{ width: '18px', height: '18px', accentColor: 'var(--accent-red)' }}
                   />
                   <div>
                     <span style={{ fontWeight: 600 }}>Detailed Scenic Background / Architecture</span>
@@ -458,16 +534,16 @@ export default function Commissions() {
             <div
               style={{
                 backgroundColor: 'var(--bg-card)',
-                border: '2px solid var(--text-primary)',
+                border: '2.5px solid var(--text-primary)',
                 padding: '2rem',
-                boxShadow: '6px 6px 0px var(--border-bold)',
+                boxShadow: '6px 6px 0px var(--text-primary)',
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '1.2rem'
               }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span className="tape-tag" style={{ background: 'var(--accent-yellow-tape)', color: '#000' }}>
+                <span className="manga-narrator-box manga-narrator-box-yellow">
                   ESTIMATION SUMMARY
                 </span>
                 <span className="font-mono" style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
@@ -492,7 +568,7 @@ export default function Commissions() {
                   className="font-heading"
                   style={{
                     fontSize: displayedPrice.includes('Custom') ? '2.4rem' : '3.4rem',
-                    color: 'var(--accent-purple)',
+                    color: 'var(--accent-red)',
                     lineHeight: 1,
                     marginTop: '0.3rem'
                   }}
@@ -524,7 +600,7 @@ export default function Commissions() {
 
               <button
                 onClick={handleProceedToInquiry}
-                className="btn-manga"
+                className="btn-manga btn-manga-red"
                 style={{ width: '100%', padding: '1rem', fontSize: '1.15rem' }}
               >
                 REQUEST A COMMISSION <ArrowRight size={18} />
@@ -536,7 +612,7 @@ export default function Commissions() {
         {/* ========================================================
             COMMISSION POLICIES & TERMS
             ======================================================== */}
-        <section style={{ borderTop: '2px solid var(--border-bold)', paddingTop: '4rem' }}>
+        <section style={{ borderTop: '2.5px solid var(--text-primary)', paddingTop: '4rem' }}>
           <div style={{ marginBottom: '2.5rem' }}>
             <div className="section-subtitle">TRANSPARENCY & TERMS</div>
             <h2 className="section-title">COMMISSION POLICIES</h2>
@@ -550,9 +626,10 @@ export default function Commissions() {
             }}
           >
             {/* Policy 1 */}
-            <div className="manga-panel" style={{ padding: '1.8rem' }}>
+            <div className="manga-panel-card" style={{ padding: '1.8rem' }}>
+              <span className="drafting-corner-mark-tl">+</span>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1rem' }}>
-                <Sparkles size={22} color="var(--accent-purple)" />
+                <Sparkles size={22} color="var(--accent-red)" />
                 <h3 className="font-heading" style={{ fontSize: '1.4rem' }}>ART STYLES</h3>
               </div>
               <p style={{ color: 'var(--text-secondary)', fontSize: '0.92rem', lineHeight: '1.6' }}>
@@ -561,7 +638,8 @@ export default function Commissions() {
             </div>
 
             {/* Policy 2 */}
-            <div className="manga-panel" style={{ padding: '1.8rem' }}>
+            <div className="manga-panel-card" style={{ padding: '1.8rem' }}>
+              <span className="drafting-corner-mark-tl">+</span>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1rem' }}>
                 <CreditCard size={22} color="var(--accent-yellow)" />
                 <h3 className="font-heading" style={{ fontSize: '1.4rem' }}>PAYMENT METHODS</h3>
@@ -572,7 +650,8 @@ export default function Commissions() {
             </div>
 
             {/* Policy 3 */}
-            <div className="manga-panel" style={{ padding: '1.8rem' }}>
+            <div className="manga-panel-card" style={{ padding: '1.8rem' }}>
+              <span className="drafting-corner-mark-tl">+</span>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1rem' }}>
                 <ShieldAlert size={22} color="var(--accent-red)" />
                 <h3 className="font-heading" style={{ fontSize: '1.4rem' }}>PAYMENT PROCESS</h3>
@@ -583,7 +662,8 @@ export default function Commissions() {
             </div>
 
             {/* Policy 4 */}
-            <div className="manga-panel" style={{ padding: '1.8rem' }}>
+            <div className="manga-panel-card" style={{ padding: '1.8rem' }}>
+              <span className="drafting-corner-mark-tl">+</span>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1rem' }}>
                 <Clock size={22} color="var(--accent-cyan)" />
                 <h3 className="font-heading" style={{ fontSize: '1.4rem' }}>TURNAROUND TIME</h3>

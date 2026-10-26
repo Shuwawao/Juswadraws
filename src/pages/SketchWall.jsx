@@ -352,10 +352,15 @@ export default function SketchWall() {
       <div className="container">
         {/* Header */}
         <div style={{ marginBottom: '3rem' }}>
-          <div className="section-subtitle">COMMUNITY CANVAS // 04</div>
+          <div className="section-subtitle">COMMUNITY CANVAS // LIVE SKETCHPAD</div>
           <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '1rem', justifyContent: 'space-between' }}>
-            <h1 className="section-title">LEAVE A NOTE / DOODLE TO THE ARTIST</h1>
-            <span className="tape-tag tape-tag-red">INTERACTIVE SKETCHPAD</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', flexWrap: 'wrap' }}>
+              <h1 className="section-title">LEAVE A NOTE / DOODLE TO THE ARTIST</h1>
+              <div className="speech-bubble">
+                <span>COMMUNITY CANVAS</span>
+              </div>
+            </div>
+            <span className="manga-narrator-box manga-narrator-box-red">INTERACTIVE SKETCHPAD</span>
           </div>
           <p style={{ color: 'var(--text-secondary)', marginTop: '0.6rem', fontSize: '1.05rem', maxWidth: '720px' }}>
             Draw a sketch, write a friendly tag, or leave a handwritten message for Joshua! All doodles are reviewed and featured on the permanent community wall.
@@ -401,15 +406,20 @@ export default function SketchWall() {
             SKETCHPAD STUDIO WORKBENCH
             ======================================================== */}
         <div
-          className="manga-panel cut-corner"
+          className="manga-panel-card cut-corner"
           style={{
             backgroundColor: 'var(--bg-secondary)',
-            border: '2px solid var(--text-primary)',
-            boxShadow: '8px 8px 0px var(--accent-purple)',
+            border: '2.5px solid var(--text-primary)',
+            boxShadow: '8px 8px 0px var(--accent-red)',
             padding: 'clamp(1rem, 3vw, 2rem)',
-            marginBottom: '5rem'
+            marginBottom: '5rem',
+            position: 'relative'
           }}
         >
+          <span className="drafting-corner-mark-tl">+</span>
+          <span className="drafting-corner-mark-tr">+</span>
+          <span className="drafting-corner-mark-bl">+</span>
+          <span className="drafting-corner-mark-br">+</span>
           {/* Studio Top Control Toolbar */}
           <div
             style={{

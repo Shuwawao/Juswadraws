@@ -173,7 +173,7 @@ export default function ImageViewerModal({
               border: '2px solid #ffffff',
               color: '#ffffff',
               cursor: 'pointer',
-              boxShadow: '2px 2px 0px var(--accent-purple)'
+              boxShadow: '2px 2px 0px var(--accent-red)'
             }}
           >
             <X size={22} />
@@ -216,7 +216,7 @@ export default function ImageViewerModal({
               alignItems: 'center',
               justifyContent: 'center',
               cursor: 'pointer',
-              boxShadow: '3px 3px 0px var(--accent-purple)'
+              boxShadow: '3px 3px 0px var(--accent-red)'
             }}
           >
             <ChevronLeft size={28} />
@@ -341,7 +341,7 @@ export default function ImageViewerModal({
               alignItems: 'center',
               justifyContent: 'center',
               cursor: 'pointer',
-              boxShadow: '3px 3px 0px var(--accent-purple)'
+              boxShadow: '3px 3px 0px var(--accent-red)'
             }}
           >
             <ChevronRight size={28} />

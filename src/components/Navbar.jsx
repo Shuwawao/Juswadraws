@@ -32,11 +32,11 @@ export default function Navbar() {
   }, [location.pathname]);
 
   const navLinks = [
-    { num: '01', label: 'WORKS', to: '/artworks' },
-    { num: '02', label: 'ABOUT', to: '/about' },
-    { num: '03', label: 'PRICING', to: '/commissions' },
-    { num: '04', label: 'SKETCH WALL', to: '/sketch-wall', badge: 'NEW' },
-    { num: '05', label: 'CONTACT', to: '/contact' }
+    { num: 'CH.01', label: 'WORKS', to: '/artworks' },
+    { num: 'CH.02', label: 'ABOUT', to: '/about' },
+    { num: 'CH.03', label: 'PRICING', to: '/commissions' },
+    { num: 'CH.04', label: 'SKETCH WALL', to: '/sketch-wall', badge: 'NEW' },
+    { num: 'CH.05', label: 'CONTACT', to: '/contact' }
   ];
 
   return (
@@ -127,17 +127,17 @@ export default function Navbar() {
                   letterSpacing: '0.08em',
                   fontWeight: 600,
                   color: isActive ? 'var(--text-primary)' : 'var(--text-muted)',
-                  borderBottom: isActive ? '2px solid var(--accent-purple)' : '2px solid transparent',
-                  paddingBottom: '0.2rem',
+                  borderBottom: isActive ? '2.5px solid var(--accent-red)' : '2.5px solid transparent',
+                  paddingBottom: '0.25rem',
                   transition: 'color 0.2s ease, border-color 0.2s ease'
                 })}
               >
-                <span style={{ color: 'var(--accent-purple)', fontSize: '0.72rem' }}>{link.num}</span>
+                <span style={{ color: 'var(--accent-red)', fontSize: '0.72rem', fontWeight: 700 }}>{link.num}</span>
                 <span>{link.label}</span>
                 {link.badge && (
                   <span
                     className="tape-tag tape-tag-red"
-                    style={{ fontSize: '0.58rem', padding: '0.1rem 0.3rem', marginLeft: '0.2rem' }}
+                    style={{ fontSize: '0.58rem', padding: '0.1rem 0.35rem', marginLeft: '0.2rem' }}
                   >
                     {link.badge}
                   </span>
@@ -248,12 +248,12 @@ export default function Navbar() {
                   padding: '0.85rem 1rem',
                   border: '1px solid var(--border-color)',
                   backgroundColor: isActive ? 'var(--bg-secondary)' : 'var(--bg-card)',
-                  boxShadow: isActive ? '4px 4px 0px var(--accent-purple)' : '2px 2px 0px var(--border-bold)',
+                  boxShadow: isActive ? '4px 4px 0px var(--accent-red)' : '2px 2px 0px var(--border-bold)',
                   textDecoration: 'none'
                 })}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                  <span className="font-mono" style={{ color: 'var(--accent-purple)', fontWeight: 700 }}>
+                  <span className="font-mono" style={{ color: 'var(--accent-red)', fontWeight: 700 }}>
                     {link.num}
                   </span>
                   <span className="font-heading" style={{ fontSize: '1.6rem', color: 'var(--text-primary)' }}>

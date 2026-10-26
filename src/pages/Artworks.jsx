@@ -125,17 +125,17 @@ export default function Artworks() {
   return (
     <div style={{ padding: 'clamp(2rem, 5vw, 4rem) 0', minHeight: '80vh' }}>
       <div className="container">
-        {/* Header Title Section */}
+        {/* Header Title Section (Manga Catalog Header, Ref 1) */}
         <div style={{ marginBottom: '3rem' }}>
-          <div className="section-subtitle">VAULT ARCHIVE // 01</div>
-          <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'baseline', gap: '1rem' }}>
-            <h1 className="section-title">DIGITAL ART GALLERY</h1>
-            <span className="tape-tag tape-tag-purple" style={{ fontSize: '0.85rem' }}>
-              {filteredArtworks.length} PIECES DISCOVERED
-            </span>
+          <div className="section-subtitle">VAULT ARCHIVE // COMPLETE CHAPTER CATALOG</div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '1rem' }}>
+            <h1 className="section-title">MANGA & ARTWORK CATALOG</h1>
+            <div className="speech-bubble">
+              <span>{filteredArtworks.length} CHAPTERS IN VAULT</span>
+            </div>
           </div>
           <p style={{ color: 'var(--text-secondary)', marginTop: '0.8rem', maxWidth: '650px', fontSize: '1.05rem' }}>
-            An editorial catalog of client commissions, personal character illustrations, anime tributes, and rough sketch studies. Filter by collection or search titles.
+            The official digital art archive of JUSWADRAWS: character illustrations, manga studies, client commissions, and kinetic action panels.
           </p>
         </div>
 
@@ -146,11 +146,11 @@ export default function Artworks() {
             flexDirection: 'column',
             gap: '1.5rem',
             marginBottom: '3rem',
-            borderBottom: '2px solid var(--border-bold)',
+            borderBottom: '2.5px solid var(--text-primary)',
             paddingBottom: '2rem'
           }}
         >
-          {/* Category Tabs */}
+          {/* Category Tabs (Manga Volume Selection) */}
           <div
             style={{
               display: 'flex',
@@ -162,42 +162,42 @@ export default function Artworks() {
             <button
               onClick={() => handleCategoryChange('all')}
               onMouseEnter={() => soundFx.playHover()}
-              className={activeCategory === 'all' ? 'btn-manga' : 'btn-manga btn-manga-secondary'}
-              style={{ padding: '0.55rem 1.1rem', fontSize: '0.95rem' }}
+              className={activeCategory === 'all' ? 'btn-manga btn-manga-red' : 'btn-manga btn-manga-secondary'}
+              style={{ padding: '0.55rem 1.15rem', fontSize: '0.95rem' }}
             >
-              ALL WORKS ({getCategoryCount('all')})
+              ALL VOLUMES ({getCategoryCount('all')})
             </button>
 
-            {CATEGORIES.map((cat) => (
+            {CATEGORIES.map((cat, catIdx) => (
               <button
                 key={cat.id}
                 onClick={() => handleCategoryChange(cat.id)}
                 onMouseEnter={() => soundFx.playHover()}
-                className={activeCategory === cat.id ? 'btn-manga' : 'btn-manga btn-manga-secondary'}
-                style={{ padding: '0.55rem 1.1rem', fontSize: '0.95rem' }}
+                className={activeCategory === cat.id ? 'btn-manga btn-manga-red' : 'btn-manga btn-manga-secondary'}
+                style={{ padding: '0.55rem 1.15rem', fontSize: '0.95rem' }}
               >
-                {cat.name.toUpperCase()} ({getCategoryCount(cat.id)})
+                VOL. 0{catIdx + 1}: {cat.name.toUpperCase()} ({getCategoryCount(cat.id)})
               </button>
             ))}
           </div>
 
-          {/* Search Input Box */}
+          {/* Search Input Box with Manga Border */}
           <div
             style={{
               display: 'flex',
               alignItems: 'center',
               backgroundColor: 'var(--bg-secondary)',
-              border: '2px solid var(--border-bold)',
-              padding: '0.6rem 1.2rem',
-              maxWidth: '480px',
+              border: '2.5px solid var(--text-primary)',
+              padding: '0.65rem 1.25rem',
+              maxWidth: '500px',
               gap: '0.8rem',
-              boxShadow: '3px 3px 0px var(--border-color)'
+              boxShadow: '4px 4px 0px var(--text-primary)'
             }}
           >
-            <Search size={18} color="var(--text-muted)" />
+            <Search size={18} color="var(--accent-red)" />
             <input
               type="text"
-              placeholder="Search artwork by title, character, or tag..."
+              placeholder="Search catalog by title, character, or keyword..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               style={{
@@ -265,13 +265,13 @@ export default function Artworks() {
             {filteredArtworks.map((art, idx) => (
               <div
                 key={art.id}
-                className="manga-panel artwork-card-entry"
+                className="manga-panel-card artwork-card-entry"
                 style={{
                   display: 'flex',
                   flexDirection: 'column',
                   cursor: 'pointer',
                   backgroundColor: 'var(--bg-card)',
-                  animationDelay: `${Math.min(idx * 0.04, 0.4)}s`
+                  animationDelay: `${Math.min(idx * 0.03, 0.35)}s`
                 }}
                 onClick={() => {
                   soundFx.playChime();
@@ -279,13 +279,18 @@ export default function Artworks() {
                 }}
                 onMouseEnter={() => soundFx.playHover()}
               >
+                {/* Technical Corner Drafting Marks */}
+                <span className="drafting-corner-mark-tl">+</span>
+                <span className="drafting-corner-mark-tr">+</span>
+
                 {/* Image Frame */}
                 <div
                   style={{
                     position: 'relative',
                     aspectRatio: idx % 3 === 0 ? '4 / 5' : '1 / 1',
                     overflow: 'hidden',
-                    backgroundColor: 'var(--bg-tertiary)'
+                    backgroundColor: 'var(--bg-tertiary)',
+                    borderBottom: '2px solid var(--text-primary)'
                   }}
                 >
                   <img
@@ -297,7 +302,7 @@ export default function Artworks() {
                       width: '100%',
                       height: '100%',
                       objectFit: 'cover',
-                      transition: 'transform 0.35s ease'
+                      transition: 'transform 0.35s cubic-bezier(0.16, 1, 0.3, 1)'
                     }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.transform = 'scale(1.05)';
@@ -307,38 +312,39 @@ export default function Artworks() {
                     }}
                   />
 
-                  {/* Corner Badge */}
-                  <div style={{ position: 'absolute', top: '0.6rem', left: '0.6rem' }}>
-                    <span className="tape-tag" style={{ fontSize: '0.65rem' }}>
-                      {art.badge}
+                  {/* Corner Narrator Badge */}
+                  <div style={{ position: 'absolute', top: '0.65rem', left: '0.65rem' }}>
+                    <span className="manga-narrator-box">
+                      ACT #{idx + 1 < 10 ? `0${idx + 1}` : idx + 1}
                     </span>
                   </div>
 
-                  {/* Subtle View Overlay Icon on Hover */}
+                  {/* Expand Tag on Image */}
                   <div
                     style={{
                       position: 'absolute',
                       bottom: '0.6rem',
                       right: '0.6rem',
-                      backgroundColor: 'rgba(0,0,0,0.7)',
-                      padding: '0.3rem 0.6rem',
-                      borderRadius: '2px',
+                      backgroundColor: 'rgba(0,0,0,0.85)',
+                      border: '1px solid rgba(255,255,255,0.2)',
+                      padding: '0.25rem 0.55rem',
                       color: '#fff',
                       display: 'flex',
                       alignItems: 'center',
                       gap: '0.3rem',
                       fontFamily: 'var(--font-mono)',
-                      fontSize: '0.7rem'
+                      fontSize: '0.68rem'
                     }}
                   >
-                    <Eye size={12} /> EXPAND
+                    <Eye size={12} color="var(--accent-red)" />
+                    <span>EXPAND</span>
                   </div>
                 </div>
 
-                {/* Info Metadata */}
-                <div style={{ padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
+                {/* Info Metadata (Matching Manga Chapter Layout, Ref 1) */}
+                <div style={{ padding: '1.1rem', display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span className="font-mono" style={{ fontSize: '0.7rem', color: 'var(--accent-purple)', fontWeight: 700 }}>
+                    <span className="font-mono" style={{ fontSize: '0.7rem', color: 'var(--accent-red)', fontWeight: 700 }}>
                       {art.categoryName}
                     </span>
                     <span className="font-mono" style={{ fontSize: '0.68rem', color: 'var(--text-muted)' }}>
@@ -349,7 +355,7 @@ export default function Artworks() {
                   <h3
                     className="font-heading"
                     style={{
-                      fontSize: '1.25rem',
+                      fontSize: '1.35rem',
                       letterSpacing: '0.03em',
                       color: 'var(--text-primary)',
                       lineHeight: '1.2'
@@ -357,6 +363,23 @@ export default function Artworks() {
                   >
                     {art.title}
                   </h3>
+
+                  <div
+                    className="font-mono"
+                    style={{
+                      fontSize: '0.7rem',
+                      color: 'var(--text-muted)',
+                      borderTop: '1px dashed var(--border-color)',
+                      paddingTop: '0.45rem',
+                      marginTop: '0.25rem',
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center'
+                    }}
+                  >
+                    <span>MANGA VAULT</span>
+                    <span style={{ color: 'var(--accent-red)' }}>ACT #{idx + 1}</span>
+                  </div>
                 </div>
               </div>
             ))}

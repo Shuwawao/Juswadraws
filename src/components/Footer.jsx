@@ -8,7 +8,7 @@ export default function Footer() {
   return (
     <footer
       style={{
-        borderTop: '2px solid var(--border-bold)',
+        borderTop: '2.5px solid var(--text-primary)',
         backgroundColor: 'var(--bg-secondary)',
         position: 'relative',
         marginTop: '6rem',
@@ -31,17 +31,17 @@ export default function Footer() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
               <span className="font-heading" style={{ fontSize: '2rem', letterSpacing: '0.06em' }}>
-                JUSWA<span style={{ color: 'var(--accent-purple)' }}>DRAWS</span>
+                JUSWA<span style={{ color: 'var(--accent-red)' }}>DRAWS</span>
               </span>
-              <span className="tape-tag tape-tag-purple">OFFICIAL</span>
+              <span className="manga-narrator-box manga-narrator-box-red">OFFICIAL</span>
             </div>
             <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', maxWidth: '360px' }}>
               Digital artist, character illustrator & professional doodler based in the Philippines. Exploring characters, expressive lines, and anime storytelling.
             </p>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginTop: '0.5rem' }}>
-              <span className="tape-tag" style={{ background: 'var(--accent-yellow-tape)', color: '#000' }}>
-                OPEN FOR COMMISSIONS
-              </span>
+              <div className="speech-bubble">
+                <span>✦ OPEN FOR COMMISSIONS</span>
+              </div>
             </div>
           </div>
 

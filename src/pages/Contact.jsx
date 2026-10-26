@@ -133,14 +133,19 @@ export default function Contact() {
         >
           {/* Main Form Panel */}
           <div
-            className="manga-panel cut-corner"
+            className="manga-panel-card cut-corner"
             style={{
               padding: 'clamp(1.5rem, 4vw, 3rem)',
               backgroundColor: 'var(--bg-card)',
-              border: '2px solid var(--text-primary)',
-              boxShadow: '8px 8px 0px var(--accent-purple)'
+              border: '2.5px solid var(--text-primary)',
+              boxShadow: '8px 8px 0px var(--accent-red)',
+              position: 'relative'
             }}
           >
+            <span className="drafting-corner-mark-tl">+</span>
+            <span className="drafting-corner-mark-tr">+</span>
+            <span className="drafting-corner-mark-bl">+</span>
+            <span className="drafting-corner-mark-br">+</span>
             {status === 'success' ? (
               <div style={{ textAlign: 'center', padding: '3rem 1rem' }}>
                 <CheckCircle2 size={64} color="#22c55e" style={{ margin: '0 auto 1.5rem' }} />
@@ -427,7 +432,7 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={status === 'loading'}
-                  className="btn-manga"
+                  className="btn-manga btn-manga-red"
                   style={{ width: '100%', padding: '1rem', fontSize: '1.2rem' }}
                 >
                   {status === 'loading' ? (
@@ -447,7 +452,8 @@ export default function Contact() {
           {/* Right Sidebar: Direct Email & Security Info */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
             {/* Direct Contact Card */}
-            <div className="manga-panel" style={{ padding: '2rem' }}>
+            <div className="manga-panel-card" style={{ padding: '2rem' }}>
+              <span className="drafting-corner-mark-tl">+</span>
               <div className="section-subtitle">DIRECT EMAIL FALLBACK</div>
               <h3 className="font-heading" style={{ fontSize: '1.6rem', marginBottom: '0.8rem' }}>
                 PREFER DIRECT EMAIL?
@@ -465,7 +471,8 @@ export default function Contact() {
             </div>
 
             {/* Turnaround & Verification Card */}
-            <div className="manga-panel" style={{ padding: '2rem', backgroundColor: 'var(--bg-secondary)' }}>
+            <div className="manga-panel-card" style={{ padding: '2rem', backgroundColor: 'var(--bg-secondary)' }}>
+              <span className="drafting-corner-mark-tl">+</span>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1rem' }}>
                 <ShieldCheck size={20} color="#22c55e" />
                 <h4 className="font-heading" style={{ fontSize: '1.25rem' }}>OFFICIAL VERIFICATION</h4>

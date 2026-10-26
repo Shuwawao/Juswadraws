@@ -107,63 +107,73 @@ export default function Home() {
             }}
           >
             {/* Left Content Column */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.4rem' }}>
-              {/* Category / Subtitle Badge */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-                <span className="tape-tag" style={{ background: 'var(--accent-yellow-tape)', color: '#000' }}>
-                  DIGITAL ART ARCHIVE
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+              {/* Comic Speech Bubble Header */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
+                <div className="speech-bubble">
+                  <span>✦ COMMISSIONS OPEN</span>
+                </div>
+                <span className="tape-tag tape-tag-red">
+                  ORIGINAL & COMMISSIONS
                 </span>
-                <span className="tape-tag tape-tag-purple">ORIGINAL & COMMISSIONS</span>
               </div>
 
-              {/* Hand-drawn Brand Asset + Oversized Typography */}
+              {/* Hand-drawn Brand Asset + Manga Title Typography */}
               <div>
-                <div style={{ marginBottom: '0.5rem', maxWidth: '320px' }}>
+                <div style={{ marginBottom: '0.5rem', maxWidth: '300px' }}>
                   <img
                     src="/artworks/my%20photo/juswa-font.png"
                     alt="JUSWADRAWS Signature Wordmark"
                     style={{
                       height: 'auto',
-                      maxHeight: '65px',
+                      maxHeight: '60px',
                       objectFit: 'contain',
-                      filter: 'drop-shadow(2px 2px 0px var(--accent-purple))'
+                      filter: 'drop-shadow(2px 2px 0px var(--accent-red))'
                     }}
                   />
                 </div>
                 <h1
                   className="font-heading"
                   style={{
-                    fontSize: 'clamp(3.5rem, 8.5vw, 6.5rem)',
-                    lineHeight: 0.9,
+                    fontSize: 'clamp(3rem, 7.5vw, 5.8rem)',
+                    lineHeight: 0.92,
                     letterSpacing: '0.02em',
                     color: 'var(--text-primary)',
                     textTransform: 'uppercase'
                   }}
                 >
                   DIGITAL ARTIST.<br />
-                  <span style={{ color: 'var(--accent-purple)' }}>CHARACTER</span> ILLUSTRATOR.<br />
-                  <span className="font-hand" style={{ fontSize: 'clamp(2rem, 5vw, 4rem)', color: 'var(--accent-yellow)', textTransform: 'none' }}>
+                  <span style={{ color: 'var(--accent-red)' }}>MANGA</span> ILLUSTRATOR.<br />
+                  <span className="font-hand" style={{ fontSize: 'clamp(1.8rem, 4vw, 3.2rem)', color: 'var(--accent-yellow)', textTransform: 'none' }}>
                     professional doodler.
                   </span>
                 </h1>
               </div>
 
-              {/* Artist Statement */}
-              <p
+              {/* Artist Statement in Narrator Box Frame */}
+              <div
                 style={{
-                  fontSize: 'clamp(1rem, 1.2vw, 1.15rem)',
-                  color: 'var(--text-secondary)',
-                  maxWidth: '540px',
-                  lineHeight: 1.6,
-                  borderLeft: '3px solid var(--accent-purple)',
-                  paddingLeft: '1rem'
+                  borderLeft: '3.5px solid var(--accent-red)',
+                  paddingLeft: '1.1rem',
+                  backgroundColor: 'var(--screentone-color)',
+                  paddingTop: '0.4rem',
+                  paddingBottom: '0.4rem'
                 }}
               >
-                &ldquo;Exploring characters, intense expressions, dynamic lines, and gritty anime stories through digital illustration.&rdquo;
-              </p>
+                <p
+                  style={{
+                    fontSize: 'clamp(0.95rem, 1.15vw, 1.1rem)',
+                    color: 'var(--text-secondary)',
+                    maxWidth: '540px',
+                    lineHeight: 1.6
+                  }}
+                >
+                  &ldquo;Exploring dynamic characters, intense expressions, gritty ink linework, and manga-inspired visual stories.&rdquo;
+                </p>
+              </div>
 
               {/* Action Buttons */}
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', marginTop: '0.5rem' }}>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', marginTop: '0.25rem' }}>
                 <Link
                   to="/artworks"
                   className="btn-manga glitch-hover"
@@ -174,7 +184,7 @@ export default function Home() {
                 </Link>
                 <Link
                   to="/commissions"
-                  className="btn-manga btn-manga-secondary glitch-hover"
+                  className="btn-manga btn-manga-red glitch-hover"
                   onClick={() => soundFx.playSlash()}
                   onMouseEnter={() => soundFx.playHover()}
                 >
@@ -182,40 +192,47 @@ export default function Home() {
                 </Link>
               </div>
 
-              {/* Metadata Micro-Ribbon */}
+              {/* Studio Metadata Technical Ribbon */}
               <div
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '1.5rem',
+                  flexWrap: 'wrap',
+                  gap: '1.25rem',
                   fontFamily: 'var(--font-mono)',
-                  fontSize: '0.78rem',
+                  fontSize: '0.75rem',
                   color: 'var(--text-muted)',
-                  marginTop: '1rem',
+                  marginTop: '0.5rem',
                   borderTop: '1px dashed var(--border-color)',
-                  paddingTop: '1rem'
+                  paddingTop: '0.85rem'
                 }}
               >
                 <div>STATUS: <strong style={{ color: '#22c55e' }}>ONLINE // OPEN</strong></div>
                 <div>MEDIUM: <strong style={{ color: 'var(--text-primary)' }}>CLIP STUDIO / KRITA</strong></div>
-                <div>LOCATION: <strong style={{ color: 'var(--text-primary)' }}>PHILIPPINES</strong></div>
+                <div>STUDIO: <strong style={{ color: 'var(--text-primary)' }}>PHILIPPINES</strong></div>
               </div>
             </div>
 
-            {/* Right Art Composition (Using Real Drawing: juswa-zoom-2.png) */}
-            <div style={{ position: 'relative', display: 'flex', justifyContent: 'center' }}>
+            {/* Right Manga Panel Composition (Hero Cover + Cinematic Eye Strip) */}
+            <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+              {/* Main Character Manga Cover Panel */}
               <div
-                className="manga-panel cut-corner"
+                className="manga-panel-card cut-corner"
                 style={{
                   width: '100%',
-                  maxWidth: '500px',
-                  aspectRatio: '1 / 1.15',
+                  maxWidth: '480px',
+                  aspectRatio: '1 / 1.12',
                   overflow: 'hidden',
-                  border: '2px solid var(--text-primary)',
-                  boxShadow: '10px 10px 0px var(--accent-purple)',
+                  margin: '0 auto',
                   position: 'relative'
                 }}
               >
+                {/* Technical Drafting Corner Marks */}
+                <span className="drafting-corner-mark-tl">+</span>
+                <span className="drafting-corner-mark-tr">+</span>
+                <span className="drafting-corner-mark-bl">+</span>
+                <span className="drafting-corner-mark-br">+</span>
+
                 <img
                   src="/artworks/my%20photo/juswa-zoom-2.png"
                   alt="Juswa Digital Persona Portrait"
@@ -227,17 +244,17 @@ export default function Home() {
                   }}
                 />
 
-                {/* Stencil Tag in corner */}
+                {/* Narrator Tag in corner */}
                 <div
                   style={{
                     position: 'absolute',
-                    top: '1rem',
-                    left: '1rem',
+                    top: '0.85rem',
+                    left: '0.85rem',
                     zIndex: 2
                   }}
                 >
-                  <span className="tape-tag" style={{ background: '#000', color: '#fff' }}>
-                    SELF-PORTRAIT // 01
+                  <span className="manga-narrator-box manga-narrator-box-red">
+                    COVER // VOL. 01
                   </span>
                 </div>
 
@@ -248,7 +265,7 @@ export default function Home() {
                     left: '0',
                     right: '0',
                     padding: '1.2rem',
-                    background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%)',
+                    background: 'linear-gradient(to top, rgba(0,0,0,0.88) 0%, transparent 100%)',
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'flex-end',
@@ -259,29 +276,139 @@ export default function Home() {
                     <div className="font-heading" style={{ fontSize: '1.4rem', letterSpacing: '0.04em' }}>
                       JUSWA PERSONA
                     </div>
-                    <div className="font-mono" style={{ fontSize: '0.75rem', color: 'var(--accent-yellow)' }}>
-                      DIGITAL INK ON CANVAS
+                    <div className="font-mono" style={{ fontSize: '0.72rem', color: 'var(--accent-yellow)' }}>
+                      INK & DIGITAL SCREENTONE
                     </div>
                   </div>
-                  <span className="font-mono" style={{ fontSize: '0.75rem', opacity: 0.8 }}>
-                    EST. 2026
+                  <span className="font-mono" style={{ fontSize: '0.72rem', opacity: 0.85 }}>
+                    SERIES 2026
                   </span>
                 </div>
               </div>
 
-              {/* Offset Decorative Graphic Tag */}
+              {/* Cinematic 3-Panel Eye Focus Strip (Inspired by Reference 2) */}
               <div
-                className="tape-tag tape-tag-red"
                 style={{
-                  position: 'absolute',
-                  bottom: '-12px',
-                  right: '10px',
-                  zIndex: 3,
-                  fontSize: '0.85rem',
-                  padding: '0.4rem 1rem'
+                  maxWidth: '480px',
+                  width: '100%',
+                  margin: '0 auto',
+                  display: 'grid',
+                  gridTemplateColumns: '1fr 1fr 1fr',
+                  gap: '0.5rem',
+                  border: '2px solid var(--border-bold)',
+                  padding: '4px',
+                  backgroundColor: 'var(--bg-card)',
+                  boxShadow: '3px 3px 0px var(--border-bold)'
                 }}
               >
-                GACHIAKUTA & MHA INSPIRED
+                <div
+                  style={{
+                    height: '65px',
+                    overflow: 'hidden',
+                    position: 'relative',
+                    border: '1px solid var(--border-color)',
+                    backgroundColor: 'var(--bg-tertiary)'
+                  }}
+                  title="Aidan Burn Expression Study"
+                >
+                  <img
+                    src="/artworks/personal%20works/aidan%20burn2.png"
+                    alt="Aidan Eye Focus"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      objectPosition: '50% 30%'
+                    }}
+                  />
+                  <span
+                    className="font-mono"
+                    style={{
+                      position: 'absolute',
+                      bottom: '2px',
+                      left: '3px',
+                      fontSize: '0.55rem',
+                      background: 'rgba(0,0,0,0.75)',
+                      color: '#fff',
+                      padding: '1px 3px'
+                    }}
+                  >
+                    FOCUS 01
+                  </span>
+                </div>
+
+                <div
+                  style={{
+                    height: '65px',
+                    overflow: 'hidden',
+                    position: 'relative',
+                    border: '1px solid var(--border-color)',
+                    backgroundColor: 'var(--bg-tertiary)'
+                  }}
+                  title="Edgerunners Kinetic Action"
+                >
+                  <img
+                    src="/artworks/commissioned%20work/final%20edgeunners.png"
+                    alt="Kinetic Action Focus"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      objectPosition: '60% 35%'
+                    }}
+                  />
+                  <span
+                    className="font-mono"
+                    style={{
+                      position: 'absolute',
+                      bottom: '2px',
+                      left: '3px',
+                      fontSize: '0.55rem',
+                      background: 'rgba(0,0,0,0.75)',
+                      color: 'var(--accent-red)',
+                      padding: '1px 3px',
+                      fontWeight: 700
+                    }}
+                  >
+                    ACTION 02
+                  </span>
+                </div>
+
+                <div
+                  style={{
+                    height: '65px',
+                    overflow: 'hidden',
+                    position: 'relative',
+                    border: '1px solid var(--border-color)',
+                    backgroundColor: 'var(--bg-tertiary)'
+                  }}
+                  title="Chainsaw Man Inked Study"
+                >
+                  <img
+                    src="/artworks/personal%20works/chainsaw%20man.png"
+                    alt="Chainsaw Man Inked Study"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      objectPosition: '50% 25%'
+                    }}
+                  />
+                  <span
+                    className="font-mono"
+                    style={{
+                      position: 'absolute',
+                      bottom: '2px',
+                      left: '3px',
+                      fontSize: '0.55rem',
+                      background: 'rgba(0,0,0,0.75)',
+                      color: '#fff',
+                      padding: '1px 3px'
+                    }}
+                  >
+                    INK 03
+                  </span>
+                </div>
               </div>
             </div>
           </div>
@@ -289,9 +416,9 @@ export default function Home() {
       </section>
 
       {/* ========================================================
-          FEATURED ARTWORKS GALLERY PREVIEW
+          FEATURED ARTWORKS GALLERY PREVIEW (Manga Catalog Style, Ref 1)
           ======================================================== */}
-      <section style={{ padding: '6rem 0', position: 'relative' }}>
+      <section style={{ padding: '5.5rem 0', position: 'relative' }}>
         <div className="container">
           <div
             style={{
@@ -300,33 +427,36 @@ export default function Home() {
               alignItems: 'flex-end',
               justifyContent: 'space-between',
               gap: '1.5rem',
-              marginBottom: '3rem'
+              marginBottom: '2.5rem'
             }}
           >
             <div>
-              <div className="section-subtitle">CURATED SELECTION</div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
+                <span className="speech-bubble">VOL. 01 — 06</span>
+                <div className="section-subtitle" style={{ margin: 0 }}>CURATED MANGA SELECTION</div>
+              </div>
               <h2 className="section-title">FEATURED ARTWORKS</h2>
-              <p style={{ color: 'var(--text-secondary)', marginTop: '0.5rem', maxWidth: '520px' }}>
-                Hand-picked original illustrations, character designs, and client commissions directly from the vault.
+              <p style={{ color: 'var(--text-secondary)', marginTop: '0.5rem', maxWidth: '540px' }}>
+                Hand-picked original character illustrations, dynamic anime compositions, and client works directly from the drafting desk.
               </p>
             </div>
             <Link to="/artworks" className="btn-manga btn-manga-secondary">
-              VIEW ALL 64 PIECES <ArrowRight size={18} />
+              OPEN FULL CATALOG (64 WORKS) <ArrowRight size={18} />
             </Link>
           </div>
 
-          {/* Asymmetric Editorial Grid */}
+          {/* Manga Page Grid (Gutters & Inked Borders, Ref 1) */}
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-              gap: '2rem'
+              gridTemplateColumns: 'repeat(auto-fit, minmax(310px, 1fr))',
+              gap: '1.75rem'
             }}
           >
             {featuredWorks.map((art, idx) => (
               <div
                 key={art.id}
-                className="manga-panel glitch-hover"
+                className="manga-panel-card glitch-hover"
                 style={{
                   display: 'flex',
                   flexDirection: 'column',
@@ -338,13 +468,18 @@ export default function Home() {
                 }}
                 onMouseEnter={() => soundFx.playHover()}
               >
+                {/* Technical Corner Marks */}
+                <span className="drafting-corner-mark-tl">+</span>
+                <span className="drafting-corner-mark-tr">+</span>
+
                 {/* Artwork Thumbnail Container */}
                 <div
                   style={{
                     position: 'relative',
                     aspectRatio: idx % 2 === 0 ? '4 / 5' : '1 / 1',
                     overflow: 'hidden',
-                    backgroundColor: 'var(--bg-tertiary)'
+                    backgroundColor: 'var(--bg-tertiary)',
+                    borderBottom: '2px solid var(--text-primary)'
                   }}
                 >
                   <img
@@ -365,26 +500,26 @@ export default function Home() {
                     }}
                   />
 
-                  {/* Corner Badge */}
-                  <div style={{ position: 'absolute', top: '0.8rem', left: '0.8rem' }}>
-                    <span className="tape-tag" style={{ fontSize: '0.65rem' }}>
-                      {art.badge}
+                  {/* Corner Narrator Badge */}
+                  <div style={{ position: 'absolute', top: '0.75rem', left: '0.75rem' }}>
+                    <span className="manga-narrator-box">
+                      ACT 0{idx + 1} // {art.categoryName}
                     </span>
                   </div>
                 </div>
 
-                {/* Card Metadata */}
-                <div style={{ padding: '1.2rem', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+                {/* Card Editorial Metadata (Matching Manga Chapter Layout, Ref 1) */}
+                <div style={{ padding: '1.25rem', display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span className="font-mono" style={{ fontSize: '0.72rem', color: 'var(--accent-purple)', fontWeight: 700 }}>
-                      0{idx + 1} // {art.categoryName}
+                    <span className="font-mono" style={{ fontSize: '0.72rem', color: 'var(--accent-red)', fontWeight: 700 }}>
+                      VOL. 0{idx + 1} CHAPTER RELEASE
                     </span>
-                    <span className="font-mono" style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
-                      EXP
+                    <span className="font-mono" style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>
+                      DIGITAL INK
                     </span>
                   </div>
 
-                  <h3 className="font-heading" style={{ fontSize: '1.45rem', letterSpacing: '0.04em', color: 'var(--text-primary)' }}>
+                  <h3 className="font-heading" style={{ fontSize: '1.5rem', letterSpacing: '0.04em', color: 'var(--text-primary)' }}>
                     {art.title}
                   </h3>
 
@@ -392,15 +527,17 @@ export default function Home() {
                     style={{
                       display: 'flex',
                       alignItems: 'center',
-                      gap: '0.5rem',
-                      marginTop: '0.4rem',
+                      justifyContent: 'space-between',
+                      marginTop: '0.5rem',
+                      paddingTop: '0.5rem',
+                      borderTop: '1px dashed var(--border-color)',
                       fontFamily: 'var(--font-mono)',
                       fontSize: '0.75rem',
                       color: 'var(--text-muted)'
                     }}
                   >
-                    <span>CLICK TO ENLARGE</span>
-                    <ArrowRight size={14} />
+                    <span>INSPECT FULL ARTWORK</span>
+                    <ArrowRight size={14} color="var(--accent-red)" />
                   </div>
                 </div>
               </div>
@@ -410,14 +547,14 @@ export default function Home() {
       </section>
 
       {/* ========================================================
-          ARTIST INTRO SECTION (Using Real Drawing: juswa pogi.jpg)
+          ARTIST INTRO SECTION (Mangaka Workbench Desk, Ref 3 & 4)
           ======================================================== */}
       <section
         style={{
-          padding: '6rem 0',
+          padding: '5.5rem 0',
           backgroundColor: 'var(--bg-secondary)',
-          borderTop: '2px solid var(--border-bold)',
-          borderBottom: '2px solid var(--border-bold)',
+          borderTop: '2.5px solid var(--text-primary)',
+          borderBottom: '2.5px solid var(--text-primary)',
           position: 'relative'
         }}
       >
@@ -426,21 +563,21 @@ export default function Home() {
             style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-              gap: '4rem',
+              gap: '3.5rem',
               alignItems: 'center'
             }}
           >
-            {/* Visual Portrait */}
+            {/* Visual Portrait in Mangaka Desk Frame */}
             <div style={{ position: 'relative' }}>
               <div
-                className="manga-panel"
+                className="manga-panel-card cut-corner"
                 style={{
                   width: '100%',
-                  maxWidth: '440px',
+                  maxWidth: '430px',
                   aspectRatio: '1 / 1',
                   margin: '0 auto',
-                  border: '3px solid var(--text-primary)',
-                  boxShadow: '10px 10px 0px var(--accent-yellow)',
+                  border: '2.5px solid var(--text-primary)',
+                  boxShadow: '8px 8px 0px var(--accent-red)',
                   overflow: 'hidden'
                 }}
               >
@@ -449,41 +586,44 @@ export default function Home() {
                   alt="Joshua Lagare (JUSWADRAWS Self Portrait)"
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
+
+                <span className="drafting-corner-mark-tl">+</span>
+                <span className="drafting-corner-mark-br">+</span>
               </div>
+
+              {/* Speech Bubble Tag on Desk (Ref 3) */}
               <div
-                className="tape-tag"
                 style={{
                   position: 'absolute',
-                  top: '-10px',
-                  left: '10%',
-                  background: 'var(--bg-tape)',
-                  color: 'var(--text-tape)',
-                  fontSize: '0.8rem'
+                  top: '-14px',
+                  left: '12%'
                 }}
               >
-                THE ARTIST BEHIND THE BRUSH
+                <div className="speech-bubble">
+                  <span>THE ARTIST BEHIND THE BRUSH</span>
+                </div>
               </div>
             </div>
 
             {/* Content Column */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.4rem' }}>
-              <div className="section-subtitle">ARTIST SPOTLIGHT</div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+              <div className="section-subtitle">ARTIST DOSSIER // MANGA ROOTS</div>
               <h2 className="section-title">MEET JUSWADRAWS</h2>
 
               <p style={{ color: 'var(--text-secondary)', fontSize: '1.05rem', lineHeight: '1.7' }}>
-                Hey, I’m <strong>Joshua</strong>—better known online as <strong>JUSWADRAWS</strong>. I’m an independent digital illustrator from the Philippines with a lifelong passion for high-energy character design, action illustration, and expressive storytelling.
+                Hey, I’m <strong>Joshua</strong>—better known online as <strong>JUSWADRAWS</strong>. I’m an independent digital illustrator from the Philippines with a lifelong passion for high-energy character design, action illustration, and expressive manga storytelling.
               </p>
 
               <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.6' }}>
-                My creative style is fueled by the raw, ink-heavy impact of modern anime like <em>Gachiakuta</em>, the kinetic heroic energy of <em>My Hero Academia</em>, and experimental urban street art. Whether I’m designing original character sheets (OCs) or bringing client concepts to life, every piece is drawn with intention, rhythm, and grit.
+                My creative style is fueled by the raw, ink-heavy impact of modern manga like <em>Gachiakuta</em>, the kinetic heroic energy of <em>My Hero Academia</em>, and experimental urban street art. Whether I’m designing original character sheets (OCs) or bringing client concepts to life, every piece is drawn with intention, rhythm, and grit.
               </p>
 
-              <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem' }}>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', marginTop: '0.25rem' }}>
                 <Link to="/about" className="btn-manga">
                   READ ARTIST BIO <ArrowRight size={18} />
                 </Link>
                 <Link to="/sketch-wall" className="btn-manga btn-manga-secondary">
-                  VISIT DOODLE WALL
+                  VISIT COMMUNITY WALL
                 </Link>
               </div>
             </div>
@@ -497,7 +637,7 @@ export default function Home() {
       <SoftwareTools />
 
       {/* ========================================================
-          INTERACTIVE SKETCHPAD CALLOUT BANNER
+          INTERACTIVE SKETCHPAD CALLOUT BANNER (Ref 4 Drafting Mat)
           ======================================================== */}
       <section
         style={{
@@ -510,27 +650,35 @@ export default function Home() {
       >
         <div className="container">
           <div
-            className="manga-panel cut-corner-both"
+            className="manga-panel-card cut-corner-both"
             style={{
-              padding: 'clamp(2rem, 5vw, 4rem)',
+              padding: 'clamp(2rem, 5vw, 3.5rem)',
               backgroundColor: 'var(--bg-card)',
-              border: '2px solid var(--text-primary)',
-              boxShadow: '8px 8px 0px var(--accent-purple)',
+              border: '2.5px solid var(--text-primary)',
+              boxShadow: '8px 8px 0px var(--accent-red)',
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
               gap: '2.5rem',
-              alignItems: 'center'
+              alignItems: 'center',
+              position: 'relative'
             }}
           >
+            <span className="drafting-corner-mark-tl">+</span>
+            <span className="drafting-corner-mark-tr">+</span>
+            <span className="drafting-corner-mark-bl">+</span>
+            <span className="drafting-corner-mark-br">+</span>
+
             <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                <span className="tape-tag tape-tag-red">INTERACTIVE WALL</span>
-                <span className="tape-tag">COMMUNITY CANVAS</span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.75rem' }}>
+                <div className="speech-bubble">
+                  <span>COMMUNITY CANVAS</span>
+                </div>
+                <span className="manga-narrator-box manga-narrator-box-red">LIVE WALL</span>
               </div>
-              <h2 className="font-heading" style={{ fontSize: 'clamp(2.2rem, 5vw, 3.8rem)', lineHeight: 0.95, color: 'var(--text-primary)' }}>
+              <h2 className="font-heading" style={{ fontSize: 'clamp(2.2rem, 5vw, 3.6rem)', lineHeight: 0.95, color: 'var(--text-primary)' }}>
                 LEAVE A NOTE / DOODLE TO THE ARTIST
               </h2>
-              <p style={{ color: 'var(--text-secondary)', marginTop: '1rem', fontSize: '1rem', lineHeight: '1.6' }}>
+              <p style={{ color: 'var(--text-secondary)', marginTop: '0.85rem', fontSize: '1rem', lineHeight: '1.6' }}>
                 Pick up a digital brush, sketch a character, sign your tag, or drop a handwritten note directly onto the community canvas. Approved doodles appear forever on the public artist wall!
               </p>
             </div>
@@ -539,8 +687,8 @@ export default function Home() {
               <div className="font-mono" style={{ fontSize: '0.82rem', color: 'var(--accent-yellow)' }}>
                 ✦ INCLUDES BRUSH SIZES, MULTI-COLOR INKS, ERASER & PNG EXPORT
               </div>
-              <Link to="/sketch-wall" className="btn-manga" style={{ fontSize: '1.25rem', padding: '1rem 2.2rem' }}>
-                <Paintbrush size={22} /> OPEN SKETCHPAD NOW
+              <Link to="/sketch-wall" className="btn-manga btn-manga-red" style={{ fontSize: '1.25rem', padding: '0.9rem 2rem' }}>
+                <Paintbrush size={20} /> OPEN SKETCHPAD NOW
               </Link>
             </div>
           </div>

@@ -26,46 +26,64 @@ export default function About() {
             marginBottom: '6rem'
           }}
         >
-          {/* Portrait Composition (Drawing #3: Untitled Design.png) */}
+          {/* Portrait Composition (Drawing #3: Untitled Design.png - Character Turnaround Style, Ref 4) */}
           <div style={{ position: 'relative' }}>
             <div
-              className="manga-panel cut-corner"
+              className="manga-panel-card cut-corner"
               style={{
                 width: '100%',
                 maxWidth: '480px',
                 aspectRatio: '1 / 1.3',
                 margin: '0 auto',
-                border: '3px solid var(--text-primary)',
-                boxShadow: '12px 12px 0px var(--accent-purple)',
-                overflow: 'hidden'
+                border: '2.5px solid var(--text-primary)',
+                boxShadow: '10px 10px 0px var(--accent-red)',
+                overflow: 'hidden',
+                position: 'relative'
               }}
             >
+              {/* Technical Drafting Corner Marks */}
+              <span className="drafting-corner-mark-tl">+</span>
+              <span className="drafting-corner-mark-tr">+</span>
+              <span className="drafting-corner-mark-bl">+</span>
+              <span className="drafting-corner-mark-br">+</span>
+
               <img
                 src="/artworks/my%20photo/Untitled%20Design.png"
                 alt="JUSWADRAWS Full Character Illustration"
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               />
+
+              <div
+                style={{
+                  position: 'absolute',
+                  top: '0.85rem',
+                  left: '0.85rem',
+                  zIndex: 2
+                }}
+              >
+                <span className="manga-narrator-box manga-narrator-box-red">
+                  CHARACTER DESIGN HUB // OC
+                </span>
+              </div>
             </div>
 
             <div
-              className="tape-tag tape-tag-yellow"
               style={{
                 position: 'absolute',
-                bottom: '-12px',
-                left: '5%',
-                background: 'var(--accent-yellow-tape)',
-                color: '#000',
-                fontSize: '0.85rem'
+                bottom: '-14px',
+                left: '6%'
               }}
             >
-              ORIGINAL CHARACTER ART // PH
+              <div className="speech-bubble">
+                <span>ORIGINAL CHARACTER ART // PH</span>
+              </div>
             </div>
           </div>
 
           {/* Bio Content */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.6rem' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-              <span className="tape-tag tape-tag-purple">JOSHUA LAGARE</span>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap' }}>
+              <span className="manga-narrator-box">JOSHUA LAGARE</span>
               <span className="font-mono" style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
                 ALIAS: JUSWADRAWS
               </span>
@@ -107,8 +125,8 @@ export default function About() {
               </div>
             </div>
 
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', marginTop: '0.5rem' }}>
-              <Link to="/commissions" className="btn-manga">
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', marginTop: '0.25rem' }}>
+              <Link to="/commissions" className="btn-manga btn-manga-red">
                 <Paintbrush size={18} /> VIEW COMMISSIONS & PRICING
               </Link>
               <Link to="/contact" className="btn-manga btn-manga-secondary">
